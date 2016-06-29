@@ -20,4 +20,4 @@ $ErrorActionPreference = $tmpError
 
 
 
-./restart-compose.ps1
+./bat-powershell.ps1
