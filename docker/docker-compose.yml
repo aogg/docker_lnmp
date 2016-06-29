@@ -1,0 +1,30 @@
+version: '2'
+services:
+  php:
+    volumes:
+      - "/Users/github/docker/docker/php/conf/conf:/usr/src/php/conf/"
+      - /Users/github/docker/docker/php/conf/etc/:/usr/src/php/etc/
+    volumes_from: 
+      - base
+    extends:
+      file: "docker-compose-full.yml"
+      service: "php"
+
+  nginx:
+    volumes:
+      - /Users/github/docker/docker/nginx/conf/:/usr/src/nginx/conf/
+    links:
+      - php:php
+    volumes_from: 
+      - base
+    extends:
+      file: "docker-compose-full.yml"
+      service: "nginx"
+
+  base:
+    volumes:
+      - /Users/:/www/
+    extends:
+      file: "docker-compose-full.yml"
+      service: "base"
+

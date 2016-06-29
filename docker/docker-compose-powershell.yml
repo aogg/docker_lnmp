@@ -1,0 +1,35 @@
+# 需要配置指定参数
+version: '2'
+services:
+  "php":
+    volumes:
+      - "${compose_volumes_php_conf}"
+      - "${compose_volumes_php_etc}"
+    volumes_from: 
+      - base
+    extends:
+      file: "docker-compose-full.yml"
+      service: "php"
+    env_file: 
+      - .windows.env
+
+  "nginx":
+    volumes:
+      - "${compose_volumes_nginx}"
+    links:
+      - "php:php"
+    volumes_from: 
+      - base
+    extends:
+      file: "docker-compose-full.yml"
+      service: "nginx"
+    env_file: 
+      - .windows.env
+
+  base:
+    volumes:
+      - "${compose_volumes_base}"
+    extends:
+      file: "docker-compose-full.yml"
+      service: "base"
+

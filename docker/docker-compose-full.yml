@@ -1,0 +1,48 @@
+version: '2'
+services:
+  php:
+    # docker run --name php-5.5 --volumes-from share_volume -v /Users/github/docker/php/conf/conf:/usr/src/php/conf/ -v /Users/github/docker/php/conf/ext/:/usr/src/php/ext/ -v /Users/github/docker/php/conf/etc/:/usr/src/php/etc/ -v /Users/github/docker/php/src/:/usr/src/php/php-ext/ -p 9000:9000 -d my-php:5.5
+    build: 
+      context: ./php/
+      dockerfile: Dockerfile
+      args:
+        PHP_CONFIGURE_DIR: "${compose_build_php_configure_dir}" # php编译包目录
+        PHP_DIR: "${compose_build_php_dir}"
+        PHP_VERSION: "${compose_build_php_version}"
+        PHP_SHA256: "${compose_build_php_sha256}"
+        PHP_GPG_KEYS: "${compose_build_php_gpg_keys}"
+        PHP_CONFIGURE_ARGS: "${compose_build_php_configure_args}"
+        PHP_PROCESSES_NUM: "${compose_build_php_processes_num}" # 并发安装扩展的数量
+    image: "my-php:${compose_build_php_version}"
+    container_name: "compose-php-${compose_build_php_version}"
+    ports:
+      - "9000:9000"
+    extends:
+      file: "docker-compose-common.yml"
+      service: "common_hosts"
+    # network_mode: host
+
+
+  nginx:
+    # docker run --name nginx -p 80:80 --volumes-from share_volume -v /Users/github/docker/nginx/conf/:/usr/src/nginx/conf/ --link php-5.5:php -d  my-nginx
+    build: 
+      context: ./nginx/
+      dockerfile: Dockerfile
+      args:
+        NGINX_VERSION: "${compose_build_nginx_version}"
+        NGINX_DIR: "${compose_build_nginx_dir}"
+        NGINX_ARGS: "${compose_build_nginx_args}"
+    image: "my-nginx:${compose_build_nginx_version}"
+    container_name: "compose-nginx-${compose_build_nginx_version}"
+    ports:
+      - "80:80"
+    # network_mode: host
+
+
+
+  base:
+    # docker run --name share_volume -v /Users/:/www/ -d my-ubuntu-14.04
+    build: ./base
+    image: my-ubuntu:14.04
+    # network_mode: host
+

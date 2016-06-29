@@ -1,0 +1,264 @@
+[
+
+	{
+		"EXT_INSTALL" : 0,
+		"EXT_NAME"    : "memcache-3.0.8",
+		"EXT_URL"     : "http://pecl.php.net/get/memcache-3.0.8.tgz",
+		"EXT_DEPEND"  : "",
+		"EXT_ARG"	  : ""
+	},
+	{
+		"EXT_INSTALL" : 0,
+		"EXT_NAME"    : "memcached-2.2.0",
+		"EXT_URL"     : "http://pecl.php.net/get/memcached-2.2.0.tgz",
+		"EXT_DEPEND"  : "libevent-dev libmemcached-dev",
+		"EXT_ARG"     : "--disable-memcached-sasl"
+	},
+	{
+		"EXT_INSTALL" : 0,
+		"EXT_NAME"    : "xdebug-2.4.0",
+		"EXT_URL"     : "http://pecl.php.net/get/xdebug-2.4.0.tgz",
+		"EXT_DEPEND"  : "",
+		"EXT_ARG"     : ""
+	},
+	{
+		"EXT_INSTALL" : 0,
+		"EXT_NAME"    : "mongo-1.6.14",
+		"EXT_URL"     : "http://pecl.php.net/get/mongo-1.6.14.tgz",
+		"EXT_DEPEND"  : "",
+		"EXT_ARG"     : ""
+	},
+	{
+		"EXT_INSTALL" : 0,
+		"EXT_NAME"    : "redis-2.2.8",
+		"EXT_URL"     : "http://pecl.php.net/get/redis-2.2.8.tgz",
+		"EXT_DEPEND"  : "",
+		"EXT_ARG"     : ""
+	},
+	{
+		"EXT_INSTALL" : 0,
+		"EXT_NAME"    : "ioncube-5.5",
+		"EXT_URL"     : "http://downloads3.ioncube.com/loader_downloads/ioncube_loaders_lin_x86-64_5.1.2.tar.gz",
+		"EXT_DEPEND"  : "",
+		"EXT_ARG"     : "",
+		"EXT_EVAL"    : "mv $tag_dir/ioncube/ioncube_loader_lin_5.5.so \"`php-config --extension-dir`/\";ext_no_make=1;"
+	},
+	{
+		"EXT_INSTALL" : 0,
+		"EXT_NAME"    : "amqp-1.7.0",
+		"EXT_URL"     : "http://pecl.php.net/get/amqp-1.7.0.tgz",
+		"EXT_DEPEND"  : "librabbitmq-dev",
+		"EXT_ARG"     : "",
+		"EXT_DESC"    : ""
+	},
+	{
+		"EXT_INSTALL" : 0,
+		"EXT_NAME"    : "amqp-1.4.0",
+		"EXT_URL"     : "http://pecl.php.net/get/amqp-1.4.0.tgz",
+		"EXT_DEPEND"  : "librabbitmq-dev",
+		"EXT_ARG"     : "",
+		"EXT_DESC"    : ""
+	},
+	{
+		"EXT_INSTALL" : 0,
+		"EXT_NAME"    : "svn-1.0.2",
+		"EXT_URL"     : "http://pecl.php.net/get/svn-1.0.2.tgz",
+		"EXT_DEPEND"  : "libsvn-dev",
+		"EXT_ARG"     : "",
+		"EXT_DESC"    : "php-5.5可安装"
+	},
+	// {
+	// 	"EXT_INSTALL" : 0,
+	// 	"EXT_NAME"    : "svn-1.0.3",
+	// 	"EXT_URL"     : "http://pecl.php.net/get/svn-1.0.3.tgz",
+	// 	"EXT_DEPEND"  : "",
+	// 	// "EXT_DESC"    : "",
+	// 	"EXT_ARG"     : ""
+	// },
+	{
+		"EXT_INSTALL" : 0,
+		"EXT_NAME"    : "pcntl",
+		"EXT_URL"     : "",
+		"EXT_DEPEND"  : "",
+		"EXT_ARG"	  : "",
+		"EXT_TGZ_DIR" : "/usr/local/php/ext/pcntl/"
+	},
+	{
+		"EXT_INSTALL" : 0,
+		"EXT_NAME"    : "curl",
+		"EXT_URL"     : "",
+		// 原需要curl目录
+		"EXT_DEPEND"  : "libcurl3-dev",
+		"EXT_ARG"	  : "",
+		"EXT_TGZ_DIR" : "/usr/local/php/ext/curl/"
+	},
+	{
+		// pecl中的zip
+		"EXT_INSTALL" : 0,
+		"EXT_NAME"    : "zip-1.13.3",
+		"EXT_URL"     : "http://pecl.php.net/get/zip-1.13.3.tgz",
+		"EXT_DEPEND"  : "",
+		"EXT_ARG"	  : "",
+		"EXT_TGZ_DIR" : ""
+	},
+	{
+		"EXT_INSTALL" : 0,
+		"EXT_NAME"    : "php_zip",
+		"EXT_URL"     : "",
+		"EXT_DEPEND"  : "",
+		"EXT_ARG"	  : "",
+		"EXT_TGZ_DIR" : "/usr/local/php/ext/zip/"
+	},
+	{
+		"EXT_INSTALL" : 0,
+		"EXT_NAME"    : "mysqli",
+		"EXT_URL"     : "",
+		"EXT_DEPEND"  : "",
+		"EXT_ARG"	  : "",
+		"EXT_TGZ_DIR" : "/usr/local/php/ext/mysqli/"
+	},
+	{
+		"EXT_INSTALL" : 0,
+		"EXT_NAME"    : "mysql",
+		"EXT_URL"     : "",
+		"EXT_DEPEND"  : "",
+		"EXT_ARG"	  : "",
+		"EXT_TGZ_DIR" : "/usr/local/php/ext/mysql/"
+	},
+	{
+		"EXT_INSTALL" : 0,
+		"EXT_NAME"    : "mbstring",
+		"EXT_URL"     : "",
+		"EXT_DEPEND"  : "",
+		"EXT_ARG"	  : "",
+		"EXT_TGZ_DIR" : "/usr/local/php/ext/mbstring/"
+	},
+	{
+		"EXT_INSTALL" : 0,
+		"EXT_NAME"    : "json",
+		"EXT_URL"     : "",
+		"EXT_DEPEND"  : "",
+		"EXT_ARG"	  : "",
+		"EXT_TGZ_DIR" : "/usr/local/php/ext/json/"
+	},
+	{
+		"EXT_INSTALL" : 0,
+		"EXT_NAME"    : "sockets",
+		"EXT_URL"     : "",
+		"EXT_DEPEND"  : "",
+		"EXT_ARG"	  : "",
+		"EXT_TGZ_DIR" : "/usr/local/php/ext/sockets/"
+	},
+	{
+		"EXT_INSTALL" : 0,
+		"EXT_NAME"    : "iconv",
+		"EXT_URL"     : "",
+		"EXT_DEPEND"  : "",
+		"EXT_ARG"	  : "",
+		"EXT_TGZ_DIR" : "/usr/local/php/ext/iconv/"
+	},
+	{
+		"EXT_INSTALL" : 0,
+		"EXT_NAME"    : "hash",
+		"EXT_URL"     : "",
+		"EXT_DEPEND"  : "",
+		"EXT_ARG"	  : "",
+		"EXT_TGZ_DIR" : "/usr/local/php/ext/hash/"
+	},
+	{
+		"EXT_INSTALL" : 0,
+		"EXT_NAME"    : "gettext",
+		"EXT_URL"     : "",
+		"EXT_DEPEND"  : "",
+		"EXT_ARG"	  : "",
+		"EXT_TGZ_DIR" : "/usr/local/php/ext/gettext/"
+	},
+	{
+		"EXT_INSTALL" : 0,
+		"EXT_NAME"    : "ftp",
+		"EXT_URL"     : "",
+		"EXT_DEPEND"  : "",
+		"EXT_ARG"	  : "",
+		"EXT_TGZ_DIR" : "/usr/local/php/ext/ftp/"
+	},
+	{
+		"EXT_INSTALL" : 0,
+		"EXT_NAME"    : "exif",
+		"EXT_URL"     : "",
+		"EXT_DEPEND"  : "",
+		"EXT_ARG"	  : "",
+		"EXT_TGZ_DIR" : "/usr/local/php/ext/exif/"
+	},
+	{
+		"EXT_INSTALL" : 0,
+		"EXT_NAME"    : "posix",
+		"EXT_URL"     : "",
+		"EXT_DEPEND"  : "",
+		"EXT_ARG"	  : "",
+		"EXT_TGZ_DIR" : "/usr/local/php/ext/posix/"
+	},
+	{
+		"EXT_INSTALL" : 0,
+		"EXT_NAME"    : "tokenizer",
+		"EXT_URL"     : "",
+		"EXT_DEPEND"  : "",
+		"EXT_ARG"	  : "",
+		"EXT_TGZ_DIR" : "/usr/local/php/ext/tokenizer/"
+	},
+	{
+		"EXT_INSTALL" : 0,
+		"EXT_NAME"    : "zlib",
+		"EXT_URL"     : "",
+		"EXT_DEPEND"  : "",
+		"EXT_ARG"	  : "",
+		"EXT_TGZ_DIR" : "/usr/local/php/ext/zlib/"
+	},
+	{
+		"EXT_INSTALL" : 0,
+		"EXT_NAME"    : "shmop",
+		"EXT_URL"     : "",
+		"EXT_DEPEND"  : "",
+		"EXT_ARG"	  : "",
+		"EXT_TGZ_DIR" : "/usr/local/php/ext/shmop/"
+	},
+	{
+		"EXT_INSTALL" : 0,
+		"EXT_NAME"    : "bcmath",
+		"EXT_URL"     : "",
+		"EXT_DEPEND"  : "",
+		"EXT_ARG"	  : "",
+		"EXT_TGZ_DIR" : "/usr/local/php/ext/bcmath/"
+	},
+	{
+		"EXT_INSTALL" : 0,
+		"EXT_NAME"    : "phar",
+		"EXT_URL"     : "",
+		"EXT_DEPEND"  : "",
+		"EXT_ARG"	  : "",
+		"EXT_TGZ_DIR" : "/usr/local/php/ext/phar/"
+	},
+	{
+		"EXT_INSTALL" : 0,
+		"EXT_NAME"    : "session",
+		"EXT_URL"     : "",
+		"EXT_DEPEND"  : "",
+		"EXT_ARG"	  : "",
+		"EXT_TGZ_DIR" : "/usr/local/php/ext/session/"
+	},
+	{
+		"EXT_INSTALL" : 0,
+		"EXT_NAME"    : "pdo",
+		"EXT_URL"     : "",
+		"EXT_DEPEND"  : "",
+		"EXT_ARG"	  : "",
+		"EXT_TGZ_DIR" : "/usr/local/php/ext/pdo/"
+	},
+	{
+		"EXT_INSTALL" : 0,
+		"EXT_NAME"    : "pdo_mysql",
+		"EXT_URL"     : "",
+		"EXT_DEPEND"  : "",
+		"EXT_ARG"	  : "",
+		"EXT_TGZ_DIR" : "/usr/local/php/ext/pdo_mysql/"
+	}
+]

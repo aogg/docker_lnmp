@@ -1,0 +1,1 @@
+1、最好先下载到本地，docker pull ubuntu:14.04
