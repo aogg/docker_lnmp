@@ -14,4 +14,4 @@ if ($status -eq 'Stopped') {
 dm env $hostName | Invoke-Expression
 
 echo '虚拟机ip地址为：';
-dm ip
+dm ip $hostName
