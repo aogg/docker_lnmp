@@ -11,4 +11,11 @@
 
 
 ** 容器配置 **<br />
-各容器放在docker文件夹内，对应配置也在容器文件夹的conf文件夹
+各容器放在docker文件夹内，对应配置也在容器文件夹的conf文件夹<br />
+其中php、nginx的conf文件夹已实现共享，可本地修改并在容器内及时体现出
+如：<br />
+1、docker/php/conf/conf/php.ini<br />
+2、docker/php/conf/etc/php-fpm.conf<br />
+3、docker/nginx/conf/nginx.conf<br />
+
+其中sources.list是通过COPY过去，所以如要修改必须重新构建所有容器
