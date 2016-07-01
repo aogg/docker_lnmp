@@ -62,6 +62,13 @@
 	},
 	{
 		"EXT_INSTALL" : 0,
+		"EXT_NAME"    : "swoole-1.8.6-stable",
+		"EXT_URL"     : "https://codeload.github.com/swoole/swoole-src/tar.gz/1.8.6-stable",
+		"EXT_DEPEND"  : "",
+		"EXT_EVAL"    : ""
+	},
+	{
+		"EXT_INSTALL" : 0,
 		"EXT_NAME"    : "ioncube-5.5",
 		"EXT_URL"     : "http://downloads3.ioncube.com/loader_downloads/ioncube_loaders_lin_x86-64_5.1.2.tar.gz",
 		"EXT_DEPEND"  : "",

@@ -138,7 +138,7 @@ php_ext_main(){
             # 下载文件地址
             EXT_URL=$(echo ${config_json_text} | jq -r ".[$i].EXT_URL");
             # 编译参数
-            EXT_ARG=$(echo ${config_json_text} | jq -r ".[$i].EXT_ARG");
+            EXT_ARG=$(echo ${config_json_text} | jq -r ".[$i].EXT_ARG"  | sed 's/^null$//i');
             # 已有的源码路径，用于安装如mysqli这类在php安装包里自带有源码扩展的扩展
             EXT_TGZ_DIR=$(echo ${config_json_text} | jq -r ".[$i].EXT_TGZ_DIR");
             # 扩展依赖（存在即安装），通过apt-get安装，可用apt-cache search来搜索对应名称
@@ -281,9 +281,9 @@ processes_exec_fifo(){
 curl_s(){
     # 多任务需要下载时有可能失败
     if [[ $log_fd = '/dev/null' ]]; then
-        curl --retry 3 -fs "$1" -o "$2"
+        curl -L --retry 3 -fs "$1" -o "$2"
     else
-        curl --retry 3 -f "$1" -o "$2"
+        curl -L --retry 3 -f "$1" -o "$2"
     fi
 }
 

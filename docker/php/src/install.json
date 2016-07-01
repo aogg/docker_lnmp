@@ -8,6 +8,7 @@
 	"mongo-1.6.14",
 	"ioncube-5.5",
 	"phalcon",
+	"swoole-1.8.6-stable",
 	"php_zip",
 	"amqp-1.4.0",
 	
