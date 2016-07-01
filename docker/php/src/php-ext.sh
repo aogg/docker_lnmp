@@ -299,7 +299,6 @@ untar(){
 
 
 # 执行
-
 start_time=`date "+%s"`
 root_dir=$(cd $(dirname $0);pwd)
 log_fd='/dev/null'
