@@ -1,5 +1,15 @@
 [
 
+	// {
+	// 	"EXT_INSTALL" : "是否安装",
+	// 	"EXT_NAME"    : "扩展名称",
+	// 	"EXT_URL"     : "扩展下载地址",
+	// 	"EXT_TGZ_DIR" : "不下载直接用本地目录",
+	// 	"EXT_DEPEND"  : "扩展对应依赖",
+	// 	"EXT_ARG"	  : "扩展编译时参数",
+	// 	"EXT_EVAL"	  : "扩展下载完成后执行的代码",
+	// 	"EXT_DESC"	  : "扩展描述"
+	// },
 	{
 		"EXT_INSTALL" : 0,
 		"EXT_NAME"    : "memcache-3.0.8",
@@ -34,6 +44,21 @@
 		"EXT_URL"     : "http://pecl.php.net/get/redis-2.2.8.tgz",
 		"EXT_DEPEND"  : "",
 		"EXT_ARG"     : ""
+	},
+	{
+		"EXT_INSTALL" : 0,
+		"EXT_NAME"    : "xhprof-0.9.4",
+		"EXT_URL"     : "http://pecl.php.net/get/xhprof-0.9.4.tgz",
+		"EXT_DEPEND"  : "",
+		"EXT_ARG"     : ""
+	},
+	{
+		"EXT_INSTALL" : 0,
+		"EXT_NAME"    : "phalcon",
+		"EXT_URL"     : "https://codeload.github.com/phalcon/cphalcon/zip/master",
+		"EXT_URL_TYPE": "zip",
+		"EXT_DEPEND"  : "",
+		"EXT_EVAL"    : "cd $tag_dir/cphalcon-master/build;./install;ext_no_make=1;"
 	},
 	{
 		"EXT_INSTALL" : 0,
@@ -132,6 +157,14 @@
 		"EXT_DEPEND"  : "",
 		"EXT_ARG"	  : "",
 		"EXT_TGZ_DIR" : "/usr/local/php/ext/mbstring/"
+	},
+	{
+		"EXT_INSTALL" : 0,
+		"EXT_NAME"    : "mcrypt",
+		"EXT_URL"     : "",
+		"EXT_DEPEND"  : "libmcrypt-dev",
+		"EXT_ARG"	  : "",
+		"EXT_TGZ_DIR" : "/usr/local/php/ext/mcrypt/"
 	},
 	{
 		"EXT_INSTALL" : 0,

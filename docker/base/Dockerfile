@@ -3,7 +3,7 @@ FROM ubuntu:14.04
 # 最好先下载到本地，docker pull ubuntu:14.04
 # 然后此images的tags为my-ubuntu-:14.04
 # docker run --name share_volume -v /Users/:/www/ -d my-ubuntu:14.04
-MAINTAINER ao
+MAINTAINER aogg
 
 # 中文乱码，（无用）
 # ENV LANG zh_CN.UTF-8
@@ -24,5 +24,7 @@ RUN sudo rm -rf /etc/apt/sources.list.d/ \
 		libssl-dev \
     	curl \
         vim \
+        zip \
+        unzip \
         libxml2 \
     && rm -rf /var/lib/apt/lists/*

@@ -16,8 +16,7 @@ function install_so(){
 
     	if [[ -d $EXT_TGZ_DIR ]]; then
     		tag_dir=$EXT_TGZ_DIR
-    		EXT_TGZ_DIR=''
-    	else
+    	elif  ext_config_value_exists $EXT_URL; then 
     		tag_dir=$temp_dir/$EXT_NAME
             tar_file_path=${tag_dir}/${EXT_NAME}'.tgz'
 
@@ -25,7 +24,7 @@ function install_so(){
     		# 定义下载回来默认文件名
             curl_s "$EXT_URL" "${tar_file_path}"
             
-    		tar -xf "${tar_file_path}" -C $tag_dir
+    		untar $EXT_URL_TYPE ${tar_file_path} $tag_dir
     		# 删除压缩包
     		rm -rf "${tag_dir}.tgz"
     	fi
@@ -146,6 +145,8 @@ php_ext_main(){
             EXT_DEPEND=$(echo $(echo ${config_json_text} | jq -r ".[$i].EXT_DEPEND"));
             # 执行自定义命令
             EXT_EVAL=$(echo $(echo ${config_json_text} | jq -r ".[$i].EXT_EVAL"));
+            # 下载文件后解压命令类型
+            EXT_URL_TYPE=$(echo $(echo ${config_json_text} | jq -r ".[$i].EXT_URL_TYPE"));
 
             install_so&
         done
@@ -276,7 +277,7 @@ processes_exec_fifo(){
 }
 
 
-
+# 控制curl是否显示进度条
 curl_s(){
     # 多任务需要下载时有可能失败
     if [[ $log_fd = '/dev/null' ]]; then
@@ -286,6 +287,14 @@ curl_s(){
     fi
 }
 
+# 多种解压方式
+untar(){
+    if [[ $1 == 'zip' ]]; then
+        unzip $2 -d $3
+    else
+        tar -zxf "$2" -C $3
+    fi
+}
 
 
 

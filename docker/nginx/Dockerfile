@@ -5,7 +5,7 @@ FROM my-ubuntu:14.04
 # 原nginx的www：/usr/src/nginx/html
 # docker run --name nginx -p 80:80 --volumes-from share_volume -v /Users/github/docker/nginx/conf/:/usr/src/nginx/conf/ --link php-5.5:php -d  my-nginx
 
-MAINTAINER ao
+MAINTAINER aogg
 
 # -y为如果提示yes/no，默认yes
 RUN apt update && apt install -y --no-install-recommends \

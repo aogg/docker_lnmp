@@ -6,7 +6,7 @@ FROM my-ubuntu:14.04
 # docker run --name php-5.5 --volumes-from share_volume -v /Users/github/docker/php5.5/conf/conf:/usr/src/php/conf/ -v /Users/github/docker/php5.5/conf/ext/:/usr/src/php/ext/ -v /Users/github/docker/php5.5/conf/etc/:/usr/src/php/etc/ -v /Users/github/docker/php5.5/src/:/usr/src/php/php-ext/ -p 9000:9000 -d my-php:5.5
 
 
-
+MAINTAINER aogg
 
 
 # 可被删除的依赖
