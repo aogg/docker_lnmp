@@ -6,7 +6,8 @@ $machineArgs['sharedFolder'] = @{
 
 # Set-Alias vm 'E:\VirtualBox\VBoxManage.exe'
 
-
+# 每个桥接网卡的名称都不一致，可打开virtualbox查看
+$machineArgs['bridgeadapter'] = 'Realtek PCIe GBE 系列控制器';
 
 
 # docker-compose 的变量，不支持powershell对象写法
