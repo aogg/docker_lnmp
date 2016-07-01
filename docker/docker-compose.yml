@@ -2,8 +2,8 @@ version: '2'
 services:
   php:
     volumes:
-      - "/Users/github/docker/docker/php/conf/conf:/usr/src/php/conf/"
-      - /Users/github/docker/docker/php/conf/etc/:/usr/src/php/etc/
+      - "/Users/github/docker_lamp/docker/php/conf/conf:/usr/src/php/conf/"
+      - /Users/github/docker_lamp/docker/php/conf/etc/:/usr/src/php/etc/
     volumes_from: 
       - base
     extends:
@@ -12,7 +12,7 @@ services:
 
   nginx:
     volumes:
-      - /Users/github/docker/docker/nginx/conf/:/usr/src/nginx/conf/
+      - /Users/github/docker_lamp/docker/nginx/conf/:/usr/src/nginx/conf/
     links:
       - php:php
     volumes_from: 
