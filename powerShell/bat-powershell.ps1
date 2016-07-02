@@ -9,6 +9,11 @@ if (-not $?){
 $backPwd = pwd;
 cd "${rootPath}/../docker/";
 
-dc restart;
+if (dc ps -q){
+    dc restart;
+}else{
+    dc up -d --build;
+}
+
 
 cd $backPwd.Path;

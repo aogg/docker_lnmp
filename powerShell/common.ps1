@@ -11,8 +11,8 @@ $machineArgs = @{
     cap = '80'; # cpu运行峰值
     memory = '666'; # 内存大小
     noShare = $true; # 不分享桌面
-    addBridged = $true; # 添加一个桥接网络
-    bridgeadapter = 'Realtek PCIe GBE 系列控制器'; # 界面名称， TODO 待确认值
+    addBridged = $false; # 添加一个桥接网络
+    bridgeadapter = 'Realtek PCIe GBE 系列控制器'; # 界面名称
     sharedFolder = @{}; # 共享目录，key为共享名，value为共享本地的路径
     other = ''; # 其他更多参数
 };
