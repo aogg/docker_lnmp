@@ -1,7 +1,7 @@
 ﻿
-$hostName = 'yy';
+$hostName = 'default';
 $machineArgs['sharedFolder'] = @{
-    'Users'='D:\PHP\phpStudy\WWW';
+    'Users'='D:\www';
 }
 
 # Set-Alias vm 'E:\VirtualBox\VBoxManage.exe'
