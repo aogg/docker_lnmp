@@ -1,4 +1,4 @@
-﻿. ${PSScriptRoot}/common.ps1
+﻿. ${PSScriptRoot}/common.ps1;
 
 
-dm rm -f -y $hostName
+dm rm -f -y $hostName;

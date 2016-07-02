@@ -1,6 +1,6 @@
 ﻿echo '启动容器...';
 
-. ${PSScriptRoot}/start-machine.ps1
+. ${PSScriptRoot}/start-machine.ps1;
 
 if (-not $?){
     exit $?;
@@ -11,4 +11,4 @@ cd "${rootPath}/../docker/";
 
 dc restart;
 
-cd $backPwd.Path
+cd $backPwd.Path;

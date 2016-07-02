@@ -1,6 +1,6 @@
 ﻿echo '停止容器...';
 
-. ${PSScriptRoot}/common.ps1
+. ${PSScriptRoot}/common.ps1;
 
 if (-not $?){
     exit $?;
@@ -11,4 +11,4 @@ cd "${rootPath}/../docker/";
 
 dc stop;
 
-cd $backPwd.Path
+cd $backPwd.Path;

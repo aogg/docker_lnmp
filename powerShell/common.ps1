@@ -1,7 +1,7 @@
 ﻿
-$rootPath = $PSScriptRoot
+$rootPath = $PSScriptRoot;
 
-. ${rootPath}/command-alias.ps1
+. ${rootPath}/command-alias.ps1;
 
 
 # 虚拟主机名称
@@ -81,9 +81,9 @@ $errorCode = ${
 
 # 自定义配置
 if (Test-Path ${rootPath}/local.ps1) {
-    . ${rootPath}/local.ps1
+    . ${rootPath}/local.ps1;
 }
 
 
 # 特殊处理
-$env:compose_build_nginx_args = $env:compose_build_nginx_args -replace '\s+', ' '
+$env:compose_build_nginx_args = $env:compose_build_nginx_args -replace '\s+', ' ';

@@ -1,4 +1,4 @@
-﻿. ${PSScriptRoot}/start-machine.ps1
+﻿. ${PSScriptRoot}/start-machine.ps1;
 
 if (-not $?){
     exit $?;
@@ -9,4 +9,4 @@ cd "${rootPath}/../docker/";
 
 dc @args;
 
-cd $backPwd.Path
+cd $backPwd.Path;

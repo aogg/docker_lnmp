@@ -4,14 +4,14 @@
 )
 
 if  ($start){
-    . ${PSScriptRoot}/start-machine.ps1
+    . ${PSScriptRoot}/start-machine.ps1;
 
     if (-not $?){
         exit $?;
     }
 }else{
     # 直接common.ps1即可
-    . ${PSScriptRoot}/common.ps1
+    . ${PSScriptRoot}/common.ps1;
 }
 
 
@@ -22,7 +22,7 @@ cd "${rootPath}/../docker/";
 if ($containerName) {
     # 做容器简称对应完整容器名称
     $containerString = dc ps $containerName;
-    $fullContainerName = ((echo $containerString | findstr Up) -split '\s+')[0]
+    $fullContainerName = ((echo $containerString | findstr Up) -split '\s+')[0];
 
     if ($fullContainerName) {
         de exec $fullContainerName $args;
@@ -34,4 +34,4 @@ if ($containerName) {
 }
 
 
-cd $backPwd.Path
+cd $backPwd.Path;

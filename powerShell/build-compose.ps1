@@ -1,6 +1,6 @@
 ﻿echo '编译容器...';
 
-. ${PSScriptRoot}/start-machine.ps1
+. ${PSScriptRoot}/start-machine.ps1;
 
 if (-not $?){
     exit $?;
@@ -8,7 +8,7 @@ if (-not $?){
 
 $backPwd = pwd;
 cd "${rootPath}/../docker/";
-dc build
+dc build;
 
 
-cd $backPwd.Path
+cd $backPwd.Path;
