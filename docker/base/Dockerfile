@@ -8,13 +8,14 @@ MAINTAINER aogg
 # 中文乱码，（无用）
 # ENV LANG zh_CN.UTF-8
 
-
+ARG BASE_ZONE='PRC'
 # 修改软件源   @see http://wiki.ubuntu.org.cn/%E6%BA%90%E5%88%97%E8%A1%A8 ，看好对应版本，并在本机ping过
 COPY ./sources.list /etc/apt/sources.list
 
 
 # rm是解决apt-get报错，如果还是运行失败就多运行几次
-RUN sudo rm -rf /etc/apt/sources.list.d/ \
+RUN cp "/usr/share/zoneinfo/${BASE_ZONE}" /etc/localtime \
+    && sudo rm -rf /etc/apt/sources.list.d/ \
 	&& sudo rm -rf /var/lib/apt/lists/partial/ \
     && apt update \
     && apt install -y --no-install-recommends \

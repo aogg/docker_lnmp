@@ -40,7 +40,11 @@ services:
 
   base:
     # docker run --name share_volume -v /Users/:/www/ -d my-ubuntu-14.04
-    build: ./base
+    build:
+      context: ./base/
+      dockerfile: Dockerfile
+      args:
+        BASE_ZONE: "${base_zone}"
     image: my-ubuntu:14.04
     # network_mode: host
 
