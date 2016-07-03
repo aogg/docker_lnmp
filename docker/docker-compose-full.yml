@@ -20,7 +20,9 @@ services:
     extends:
       file: "docker-compose-common.yml"
       service: "common_hosts"
-    # network_mode: host
+    networks:
+      aliases: 
+        - php
 
 
   nginx:
@@ -36,7 +38,9 @@ services:
     container_name: "compose-nginx-${compose_build_nginx_version}"
     ports:
       - "80:80"
-    # network_mode: host
+    networks:
+      aliases: 
+        - nginx
 
 
 
@@ -45,4 +49,9 @@ services:
     build: ./base
     image: my-ubuntu:14.04
     # network_mode: host
+
+
+networks:
+  all:
+
 
