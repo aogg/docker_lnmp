@@ -12,12 +12,14 @@ services:
       service: "php"
     env_file: 
       - .windows.env
+    networks:
+      all:
+        aliases: 
+          - php
 
   "nginx":
     volumes:
       - "${compose_volumes_nginx}"
-    links:
-      - "php:php"
     volumes_from: 
       - base
     extends:
@@ -25,6 +27,10 @@ services:
       service: "nginx"
     env_file: 
       - .windows.env
+    networks:
+      all:
+        aliases: 
+          - nginx
 
   base:
     volumes:
@@ -33,3 +39,5 @@ services:
       file: "docker-compose-full.yml"
       service: "base"
 
+networks:
+  all:

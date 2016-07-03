@@ -20,10 +20,6 @@ services:
     extends:
       file: "docker-compose-common.yml"
       service: "common_hosts"
-    networks:
-      all:
-        aliases: 
-          - php
 
 
   nginx:
@@ -39,10 +35,6 @@ services:
     container_name: "compose-nginx-${compose_build_nginx_version}"
     ports:
       - "80:80"
-    networks:
-      all:
-        aliases: 
-          - nginx
 
 
 
@@ -53,7 +45,5 @@ services:
     # network_mode: host
 
 
-networks:
-  all:
 
 

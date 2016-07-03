@@ -9,17 +9,23 @@ services:
     extends:
       file: "docker-compose-full.yml"
       service: "php"
+    networks:
+      all:
+        aliases: 
+          - php
 
   nginx:
     volumes:
       - /Users/github/docker_lamp/docker/nginx/conf/:/usr/src/nginx/conf/
-    links:
-      - php:php
     volumes_from: 
       - base
     extends:
       file: "docker-compose-full.yml"
       service: "nginx"
+    networks:
+      all:
+        aliases: 
+          - nginx
 
   base:
     volumes:
@@ -28,3 +34,5 @@ services:
       file: "docker-compose-full.yml"
       service: "base"
 
+networks:
+  all:
