@@ -21,8 +21,9 @@ services:
       file: "docker-compose-common.yml"
       service: "common_hosts"
     networks:
-      aliases: 
-        - php
+      all:
+        aliases: 
+          - php
 
 
   nginx:
@@ -39,8 +40,9 @@ services:
     ports:
       - "80:80"
     networks:
-      aliases: 
-        - nginx
+      all:
+        aliases: 
+          - nginx
 
 
 
