@@ -1,13 +1,13 @@
 version: '2'
 services:
     common_nginx_aliases:
-      # 本地nginx项目填写在这
+      # 鏈湴nginx椤圭洰濉啓鍦ㄨ繖
       networks:
         all:
           aliases:
             - nginx
     common_hosts:
-      # php中公共的hosts修改
+      # php涓叕鍏辩殑hosts淇敼
       extra_hosts:
         - "localhost:127.0.0.1"
 
