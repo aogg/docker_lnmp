@@ -27,10 +27,6 @@ services:
       service: "nginx"
     env_file: 
       - .windows.env
-    networks:
-      all:
-        aliases: 
-          - nginx
 
   base:
     volumes:
