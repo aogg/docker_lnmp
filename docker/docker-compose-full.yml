@@ -37,7 +37,7 @@ services:
       - "80:80"
     extends:
       file: "docker-compose-common.yml"
-      service: "common_dev_aliases"
+      service: "common_nginx_aliases"
 
 
 

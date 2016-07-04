@@ -1,11 +1,11 @@
 version: '2'
 services:
-    common_dev_aliases:
+    common_nginx_aliases:
       # 本地nginx项目填写在这
       networks:
         all:
           aliases:
-            - "nginx"
+            - nginx
     common_hosts:
       # php中公共的hosts修改
       extra_hosts:
