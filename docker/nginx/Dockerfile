@@ -116,6 +116,10 @@ WORKDIR $NGINX_DIR
 
 # TODO USER www-data
 
-EXPOSE 80
+EXPOSE 80 443
+
+# 保证nginx运行在共享目录后
+VOLUME ["${NGINX_CONF_DIR}"]
+
 # 让nginx在前台运行
 ENTRYPOINT ["nginx", "-g", "daemon off;"]
