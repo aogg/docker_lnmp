@@ -28,7 +28,7 @@ $env:compose_build_php_version = '5.5.36';
 # php编译目录
 $env:compose_build_php_configure_dir = '/usr/local/php';
 # php安装目录
-$env:compose_build_php_dir = '/usr/src/php123a';
+$env:compose_build_php_dir = '/usr/src/php';
 # php验证用
 $env:compose_build_php_sha256 = 'e1bbe33d6b4da66b15c483131520a9fc505eeb6629fa70c5cfba79590a1d0801';
 $env:compose_build_php_gpg_keys = '0B96609E270F565C13292B24C13C70B87267B52D 0BD78B5F97500D450838F95DFE857D9A90D90EC1 F38252826ACD957EF380D39F2F7956BC5DA04B5D';
