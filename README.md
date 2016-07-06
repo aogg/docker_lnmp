@@ -50,3 +50,13 @@ bash /usr/local/php-ext.sh memcached-2.2.0 xdebug-2.4.0
 $env:compose_build_php_processes_num = 15;
 ```
 
+
+
+
+
+## 各截图
+
+mini安装[多个扩展](https://github.com/aogg/docker_lamp/blob/a716e496d59bf408804cda1e10b970af387a62bf/docker/php/src/install.json)时间<br />
+![github](https://raw.githubusercontent.com/aogg/image_repository/master/docker_lamp/mini%E5%AE%89%E8%A3%85%E6%89%A9%E5%B1%95%E6%97%B6%E9%97%B4.png "mini安装扩展时间")
+<br />
+
