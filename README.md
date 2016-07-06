@@ -35,7 +35,9 @@
 
 
 **多进程安装扩展**<br />
-- 1、PHP扩展安装相关目录为[docker/php/src/](https://github.com/aogg/docker_lamp/tree/master/docker/php/src)，对应容器内路径为/usr/local/php-ext/。<br />
+- 1、PHP扩展安装相关目录为[docker/php/src/](https://github.com/aogg/docker_lamp/tree/master/docker/php/src)，对应容器内路径为/usr/local/php-ext/。
+
+<br />
 在windows中可通过在[/powerShell/local.ps1](https://github.com/aogg/docker_lamp/blob/master/powerShell/local.ps1)文件中指定
 ```powershell
 $env:compose_build_php_configure_dir = '/usr/local/php';
@@ -46,7 +48,9 @@ $env:compose_build_php_configure_dir = '/usr/local/php';
 ```shell 
 bash /usr/local/php-ext.sh memcached-2.2.0 xdebug-2.4.0
 ```
-- 5、最大并发安装PHP扩展的数量，默认值为15。<br />
+- 5、最大并发安装PHP扩展的数量，默认值为15。
+
+<br />
 在windows中可修改[/powerShell/local.ps1](https://github.com/aogg/docker_lamp/blob/master/powerShell/local.ps1)文件
 ```powershell
 $env:compose_build_php_processes_num = 15;
