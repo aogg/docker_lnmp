@@ -9,8 +9,6 @@ services:
     extends:
       file: "docker-compose-full.yml"
       service: "php"
-    env_file: 
-      - .default.env
     networks:
       all:
         aliases: 
@@ -24,8 +22,6 @@ services:
     extends:
       file: "docker-compose-full.yml"
       service: "nginx"
-    env_file: 
-      - .default.env
     networks:
       all:
         aliases: 
