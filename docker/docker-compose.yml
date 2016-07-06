@@ -2,8 +2,8 @@ version: '2'
 services:
   php:
     volumes:
-      - "/Users/github/docker_lamp/docker/php/conf/conf:/usr/src/php/conf/"
-      - /Users/github/docker_lamp/docker/php/conf/etc/:/usr/src/php/etc/
+      - "${compose_dir}/docker_lamp/docker/php/conf/conf:/usr/src/php/conf/"
+      - "${compose_dir}/docker_lamp/docker/php/conf/etc/:/usr/src/php/etc/"
     volumes_from: 
       - base
     extends:
@@ -18,7 +18,7 @@ services:
 
   nginx:
     volumes:
-      - /Users/github/docker_lamp/docker/nginx/conf/:/usr/src/nginx/conf/
+      - "${compose_dir}/docker_lamp/docker/nginx/conf/:/usr/src/nginx/conf/"
     volumes_from: 
       - base
     extends:
@@ -33,7 +33,7 @@ services:
 
   base:
     volumes:
-      - /Users/:/www/
+      - "${compose_volumes_base}"
     extends:
       file: "docker-compose-full.yml"
       service: "base"
