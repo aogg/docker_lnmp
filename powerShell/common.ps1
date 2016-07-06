@@ -18,7 +18,7 @@ $machineArgs = @{
 };
 
 # 使用哪个compose.yml文件
-$composeYml = 'docker-compose-powershell.yml';
+$composeYml = 'windows/docker-compose-powershell.yml';
 
 
 
