@@ -22,10 +22,6 @@ services:
     extends:
       file: "docker-compose-full.yml"
       service: "nginx"
-    networks:
-      all:
-        aliases: 
-          - nginx
 
   base:
     volumes:
