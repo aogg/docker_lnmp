@@ -93,6 +93,22 @@
 	},
 	{
 		"EXT_INSTALL" : 0,
+		"EXT_NAME"    : "event-2.1.0",
+		"EXT_URL"     : "http://pecl.php.net/get/event-2.1.0.tgz",
+		"EXT_DEPEND"  : "",
+		"EXT_ARG"     : "",
+		"EXT_DESC"    : ""
+	},
+	{
+		"EXT_INSTALL" : 0,
+		"EXT_NAME"    : "ev-1.0.0",
+		"EXT_URL"     : "http://pecl.php.net/get/ev-1.0.0.tgz",
+		"EXT_DEPEND"  : "",
+		"EXT_ARG"     : "",
+		"EXT_DESC"    : ""
+	},
+	{
+		"EXT_INSTALL" : 0,
 		"EXT_NAME"    : "svn-1.0.2",
 		"EXT_URL"     : "http://pecl.php.net/get/svn-1.0.2.tgz",
 		"EXT_DEPEND"  : "libsvn-dev",
