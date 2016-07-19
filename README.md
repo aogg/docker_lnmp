@@ -6,7 +6,7 @@
 
 
 ## 使用
-- 1、修改[/powerShell/local.ps1](https://github.com/aogg/docker_lamp/blob/master/powerShell/local.ps1)文件，
+- 1、修改[/powerShell/local.ps1](powerShell/local.ps1)文件，
 更多配置设置可在[/powerShell/common.ps1](https://github.com/aogg/docker_lamp/blob/master/powerShell/common.ps1)中
 - 2、配置执行文件的环境变量，可查看[/powerShell/command-alias.ps1](https://github.com/aogg/docker_lamp/blob/master/powerShell/command-alias.ps1)文件，其中VBoxManage在virtualbox的bin目录下
 - 3、双击"[开始.bat](https://github.com/aogg/docker_lamp/blob/master/%E5%BC%80%E5%A7%8B.bat)"
