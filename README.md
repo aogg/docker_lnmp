@@ -1,19 +1,19 @@
 # 基于docker的LAMP环境
 
 ## 说明
-这是一个基于docker的LAMP环境，并利用PowerShell提供在windows下的个性配置集中管理（其中根目录下的"[开始.bat](https://github.com/aogg/docker_lamp/blob/master/%E5%BC%80%E5%A7%8B.bat)"可一步构建docker环境，并可重启所有容器。）
+这是一个基于docker的LAMP环境，并利用PowerShell提供在windows下的个性配置集中管理（其中根目录下的"[开始.bat](%E5%BC%80%E5%A7%8B.bat)"可一步构建docker环境，并可重启所有容器。）
 
 
 
 ## 使用
 - 1、修改[/powerShell/local.ps1](powerShell/local.ps1)文件，
-更多配置设置可在[/powerShell/common.ps1](https://github.com/aogg/docker_lamp/blob/master/powerShell/common.ps1)中
-- 2、配置执行文件的环境变量，可查看[/powerShell/command-alias.ps1](https://github.com/aogg/docker_lamp/blob/master/powerShell/command-alias.ps1)文件，其中VBoxManage在virtualbox的bin目录下
-- 3、双击"[开始.bat](https://github.com/aogg/docker_lamp/blob/master/%E5%BC%80%E5%A7%8B.bat)"
+更多配置设置可在[/powerShell/common.ps1](powerShell/common.ps1)中
+- 2、配置执行文件的环境变量，可查看[/powerShell/command-alias.ps1](powerShell/command-alias.ps1)文件，其中VBoxManage在virtualbox的bin目录下
+- 3、双击"[开始.bat](%E5%BC%80%E5%A7%8B.bat)"
 
 
 **注意**
-- 1、如果首次运行"[开始.bat](https://github.com/aogg/docker_lamp/blob/master/%E5%BC%80%E5%A7%8B.bat)"并在创建容器时报错，继续双击运行即可。
+- 1、如果首次运行"[开始.bat](%E5%BC%80%E5%A7%8B.bat)"并在创建容器时报错，继续双击运行即可。
 
 
 ## 结构说明
@@ -26,9 +26,9 @@
 各容器放在docker文件夹内，对应配置也在容器文件夹的conf文件夹  
 其中php、nginx的conf文件夹已实现共享，可本地修改并在容器内及时体现出
 如：  
-1、[docker/php/conf/conf/php.ini](https://github.com/aogg/docker_lamp/blob/master/docker/php/conf/conf/php.ini)  
-2、[docker/php/conf/etc/php-fpm.conf](https://github.com/aogg/docker_lamp/blob/master/docker/php/conf/etc/php-fpm.conf)  
-3、[docker/nginx/conf/nginx.conf](https://github.com/aogg/docker_lamp/blob/master/docker/nginx/conf/nginx.conf)  
+1、[docker/php/conf/conf/php.ini](docker/php/conf/conf/php.ini)  
+2、[docker/php/conf/etc/php-fpm.conf](docker/php/conf/etc/php-fpm.conf)  
+3、[docker/nginx/conf/nginx.conf](docker/nginx/conf/nginx.conf)  
 
 其中sources.list是通过COPY过去，所以如要修改必须重新构建所有容器
 
@@ -38,7 +38,7 @@
 - 1、PHP扩展安装相关目录为[docker/php/src/](https://github.com/aogg/docker_lamp/tree/master/docker/php/src)，对应容器内路径为/usr/local/php-ext/。
 
   
-在windows中可通过在[/powerShell/local.ps1](https://github.com/aogg/docker_lamp/blob/master/powerShell/local.ps1)文件中指定
+在windows中可通过在[/powerShell/local.ps1](powerShell/local.ps1)文件中指定
 ```powershell
 $env:compose_build_php_configure_dir = '/usr/local/php';
 ```
@@ -64,7 +64,7 @@ bash /usr/local/php-ext.sh memcached-2.2.0 xdebug-2.4.0
 - 5、最大并发安装PHP扩展的数量，默认值为15。
 
   
-在windows中可修改[/powerShell/local.ps1](https://github.com/aogg/docker_lamp/blob/master/powerShell/local.ps1)文件
+在windows中可修改[/powerShell/local.ps1](powerShell/local.ps1)文件
 ```powershell
 $env:compose_build_php_processes_num = 15;
 ```
