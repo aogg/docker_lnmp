@@ -1,4 +1,7 @@
 ﻿echo '停止容器...';
+if (!${PSScriptRoot}) {
+    ${PSScriptRoot} = Split-Path -Parent $MyInvocation.MyCommand.Definition
+}
 
 . ${PSScriptRoot}/common.ps1;
 

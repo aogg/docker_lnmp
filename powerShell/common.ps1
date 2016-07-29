@@ -1,4 +1,8 @@
 ﻿
+
+if (!${PSScriptRoot}) {
+    ${PSScriptRoot} = Split-Path -Parent $MyInvocation.MyCommand.Definition
+}
 $rootPath = $PSScriptRoot;
 
 . ${rootPath}/command-alias.ps1;

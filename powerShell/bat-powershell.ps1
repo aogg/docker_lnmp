@@ -1,4 +1,7 @@
 ﻿echo '启动容器...';
+if (!${PSScriptRoot}) {
+    ${PSScriptRoot} = Split-Path -Parent $MyInvocation.MyCommand.Definition
+}
 
 . ${PSScriptRoot}/start-machine.ps1;
 

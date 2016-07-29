@@ -2,6 +2,9 @@
     [string]$containerName = $args['0'],
     [switch]$start
 )
+if (!${PSScriptRoot}) {
+    ${PSScriptRoot} = Split-Path -Parent $MyInvocation.MyCommand.Definition
+}
 
 if  ($start){
     . ${PSScriptRoot}/start-machine.ps1;

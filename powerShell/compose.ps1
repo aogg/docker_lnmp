@@ -1,4 +1,7 @@
-﻿. ${PSScriptRoot}/start-machine.ps1;
+﻿if (!${PSScriptRoot}) {
+    ${PSScriptRoot} = Split-Path -Parent $MyInvocation.MyCommand.Definition
+}
+. ${PSScriptRoot}/start-machine.ps1;
 
 if (-not $?){
     exit $?;

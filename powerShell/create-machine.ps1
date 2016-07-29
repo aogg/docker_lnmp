@@ -1,4 +1,7 @@
-﻿. ${PSScriptRoot}/common.ps1;
+﻿if (!${PSScriptRoot}) {
+    ${PSScriptRoot} = Split-Path -Parent $MyInvocation.MyCommand.Definition
+}
+. ${PSScriptRoot}/common.ps1;
 
 
 # 添加共享文件夹
