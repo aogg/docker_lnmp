@@ -15,6 +15,7 @@ $machineArgs['addBridged'] = $false;
 $machineArgs['bridgeadapter'] = 'Realtek PCIe GBE 系列控制器';
 
 
+# 在windows中，如果是自带vm（v1.12以上），则C盘对应写法为/c/
 # docker-compose 的变量，不支持powershell对象写法
 # docker_lamp下的docker在虚拟机的路径
 $env:compose_dir = '/Users/github/docker_lamp/docker/';
