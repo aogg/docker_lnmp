@@ -7,7 +7,13 @@
 
 ## 使用
 - 1、修改[/powerShell/local.ps1](powerShell/local.ps1)文件，
-更多配置设置可在[/powerShell/common.ps1](powerShell/common.ps1)中
+更多配置设置可在[/powerShell/common.ps1](powerShell/common.ps1)中查看。其中www目录需配置，如：
+```powershell
+# windows下的v1.12
+$env:compose_volumes_base = 'd:/www/:/www/';
+# windows下使用virtualbox
+$env:compose_volumes_base = '/Users/:/www/';
+```
 - 2、配置执行文件的环境变量，可查看[/powerShell/command-alias.ps1](powerShell/command-alias.ps1)文件，其中VBoxManage在virtualbox的bin目录下
 - 3、双击"[开始.bat](%E5%BC%80%E5%A7%8B.bat)"
 
