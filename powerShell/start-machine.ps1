@@ -4,7 +4,7 @@
 
 . ${PSScriptRoot}/common.ps1;
 
-if ((de -v) -match 'version [01]\.((0[0-9])|1[01])') { # 这是v1.12
+if ($env:vmOrVirtualbox) { # 这是v1.12
     . ${rootPath}/create-machine.ps1;
 
     if (-not $?){

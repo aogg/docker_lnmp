@@ -92,3 +92,4 @@ if (Test-Path ${rootPath}/local.ps1) {
 
 # 特殊处理
 $env:compose_build_nginx_args = $env:compose_build_nginx_args -replace '\s+', ' ';
+$env:vmOrVirtualbox = (de -v) -match 'version [01]\.((0[0-9])|1[01])'
