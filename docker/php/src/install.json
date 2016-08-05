@@ -14,7 +14,7 @@
 	"amqp-1.4.0",
 	
 	"curl", "pcntl", "mysqli",	"mysql", "mbstring", "json", "sockets", "iconv", "hash", "gettext", "ftp", "exif", "posix", "tokenizer", "shmop", "bcmath", "phar", "pdo", "pdo_mysql", "zlib",
-	"mcrypt", "session"
+	"mcrypt", "gd", "session"
 	// "需要安装的扩展"
 	// 留意最后的逗号
 	// todo 安装顺序不对

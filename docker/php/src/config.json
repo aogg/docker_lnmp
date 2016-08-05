@@ -247,6 +247,14 @@
 	},
 	{
 		"EXT_INSTALL" : 0,
+		"EXT_NAME"    : "gd",
+		"EXT_URL"     : "",
+		"EXT_DEPEND"  : "libpng-dev libjpeg-dev",
+		"EXT_ARG"	  : "",
+		"EXT_TGZ_DIR" : "/usr/local/php/ext/gd/"
+	},
+	{
+		"EXT_INSTALL" : 0,
 		"EXT_NAME"    : "posix",
 		"EXT_URL"     : "",
 		"EXT_DEPEND"  : "",
