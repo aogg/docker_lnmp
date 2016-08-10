@@ -23,7 +23,7 @@ $env:host_volumes_www = '/Users/';
 $env:compose_volumes_base = "${env:host_volumes_www}:/www/";
 # docker_lamp下的docker在虚拟机的路径
 if ($env:vmOrVirtualbox) { # v1.12下可直接判断出目录
-    $env:compose_dir = "${$rootPath}/../docker/";
+    $env:compose_dir = "${rootPath}/../docker/";
 }else{
     $env:compose_dir = "${env:host_volumes_www}github/docker_lamp/docker/";
 }
