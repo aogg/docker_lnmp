@@ -10,7 +10,7 @@ if (-not $?){
 }
 
 $backPwd = pwd;
-cd "${rootPath}/../docker/";
+cd "${rootPath}/../";
 
 if (dc ps -q){
     dc restart;

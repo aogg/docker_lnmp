@@ -4,7 +4,7 @@
 
 . ${PSScriptRoot}/common.ps1;
 
-if (!$env:vmOrVirtualbox) { # 这是v1.12
+if (!$env:vmOrVirtualbox) { # 这是v1.12之前
     . ${rootPath}/create-machine.ps1;
 
     if (-not $?){

@@ -8,7 +8,7 @@ if (-not $?){
 }
 
 $backPwd = pwd;
-cd "${rootPath}/../docker/";
+cd "${rootPath}/../";
 
 dc @args;
 

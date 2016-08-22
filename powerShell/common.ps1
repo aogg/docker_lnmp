@@ -5,6 +5,10 @@ if (!${PSScriptRoot}) {
 }
 $rootPath = $PSScriptRoot;
 
+
+# 使用哪个compose.yml文件，留意当前yml文件目录不要有.env文件
+$composeYml = './docker/docker-compose-powershell.yml';
+
 . ${rootPath}/command-alias.ps1;
 
 
@@ -21,8 +25,6 @@ $machineArgs = @{
     other = ''; # 其他更多参数
 };
 
-# 使用哪个compose.yml文件，留意当前yml文件目录不要有.env文件
-$composeYml = 'windows/docker-compose-powershell.yml';
 
 
 
