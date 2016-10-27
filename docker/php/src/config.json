@@ -40,6 +40,13 @@
 	},
 	{
 		"EXT_INSTALL" : 0,
+		"EXT_NAME"    : "mongodb-1.1.9",
+		"EXT_URL"     : "http://pecl.php.net/get/mongodb-1.1.9.tgz",
+		"EXT_DEPEND"  : "",
+		"EXT_ARG"     : ""
+	},
+	{
+		"EXT_INSTALL" : 0,
 		"EXT_NAME"    : "redis-2.2.8",
 		"EXT_URL"     : "http://pecl.php.net/get/redis-2.2.8.tgz",
 		"EXT_DEPEND"  : "",
