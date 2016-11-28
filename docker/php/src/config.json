@@ -132,6 +132,14 @@
 	// },
 	{
 		"EXT_INSTALL" : 0,
+		"EXT_NAME"    : "openssl",
+		"EXT_URL"     : "",
+		"EXT_DEPEND"  : "",
+		"EXT_ARG"	  : "",
+		"EXT_TGZ_DIR" : "/usr/local/php/ext/openssl/"
+	},
+	{
+		"EXT_INSTALL" : 0,
 		"EXT_NAME"    : "pcntl",
 		"EXT_URL"     : "",
 		"EXT_DEPEND"  : "",
