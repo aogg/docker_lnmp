@@ -3,7 +3,7 @@ FROM my-ubuntu:14.04
 #安装在/usr/src/php 
 # see：https://github.com/docker-library/php/blob/master/5.5/Dockerfile
 # 如果是php -a运行则run时必须加-t参数
-# docker run --name php-5.5 --volumes-from share_volume -v /Users/github/docker_lamp/php5.5/conf/conf:/usr/src/php/conf/ -v /Users/github/docker_lamp/php5.5/conf/ext/:/usr/src/php/ext/ -v /Users/github/docker_lamp/php5.5/conf/etc/:/usr/src/php/etc/ -v /Users/github/docker_lamp/php5.5/src/:/usr/src/php/php-ext/ -p 9000:9000 -d my-php:5.5
+# docker run --name php-5.5 --volumes-from share_volume -v /Users/github/docker_lnmp/php5.5/conf/conf:/usr/src/php/conf/ -v /Users/github/docker_lnmp/php5.5/conf/ext/:/usr/src/php/ext/ -v /Users/github/docker_lnmp/php5.5/conf/etc/:/usr/src/php/etc/ -v /Users/github/docker_lnmp/php5.5/src/:/usr/src/php/php-ext/ -p 9000:9000 -d my-php:5.5
 
 
 MAINTAINER aogg

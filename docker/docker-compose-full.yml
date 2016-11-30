@@ -1,7 +1,7 @@
 version: '2'
 services:
   php:
-    # docker run --name php-5.5 --volumes-from compose_base -v /Users/github/docker_lamp/docker/php/conf/conf/:/usr/src/php/conf/ -v /Users/github/docker_lamp/docker/php/conf/ext/:/usr/src/php/ext/ -v /Users/github/docker_lamp/docker/php/conf/etc/:/usr/src/php/etc/ -v /Users/github/docker_lamp/docker/php/src/:/usr/src/php/php-ext/ -p 9000:9000 -d my-php:5.5.36
+    # docker run --name php-5.5 --volumes-from compose_base -v /Users/github/docker_lnmp/docker/php/conf/conf/:/usr/src/php/conf/ -v /Users/github/docker_lnmp/docker/php/conf/ext/:/usr/src/php/ext/ -v /Users/github/docker_lnmp/docker/php/conf/etc/:/usr/src/php/etc/ -v /Users/github/docker_lnmp/docker/php/src/:/usr/src/php/php-ext/ -p 9000:9000 -d my-php:5.5.36
     build: 
       context: ./php/
       dockerfile: Dockerfile
@@ -23,7 +23,7 @@ services:
 
 
   nginx:
-    # docker run --name nginx -p 80:80 --volumes-from compose_base -v /Users/github/docker_lamp/docker/nginx/conf/:/usr/src/nginx/conf/ --link php-5.5:php -d  my-nginx-1.10.1
+    # docker run --name nginx -p 80:80 --volumes-from compose_base -v /Users/github/docker_lnmp/docker/nginx/conf/:/usr/src/nginx/conf/ --link php-5.5:php -d  my-nginx-1.10.1
     build: 
       context: ./nginx/
       dockerfile: Dockerfile

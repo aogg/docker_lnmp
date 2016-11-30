@@ -3,7 +3,7 @@ FROM my-ubuntu:14.04
 #安装在/usr/src/nginx 
 # see：https://github.com/docker-library/nginx/blob/master/1.7/Dockerfile
 # 原nginx的www：/usr/src/nginx/html
-# docker run --name nginx -p 80:80 --volumes-from share_volume -v /Users/github/docker_lamp/nginx/conf/:/usr/src/nginx/conf/ --link php-5.5:php -d  my-nginx
+# docker run --name nginx -p 80:80 --volumes-from share_volume -v /Users/github/docker_lnmp/nginx/conf/:/usr/src/nginx/conf/ --link php-5.5:php -d  my-nginx
 
 MAINTAINER aogg
 
