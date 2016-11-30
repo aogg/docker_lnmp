@@ -1,7 +1,7 @@
-# 基于docker的LAMP环境
+# 基于docker的LNMP环境
 
 ## 说明
-这是一个基于docker的LAMP环境，并利用PowerShell提供在windows下的个性配置集中管理（其中根目录下的"[开始.bat](%E5%BC%80%E5%A7%8B.bat)"可一步构建docker环境，并可重启所有容器。）
+这是一个基于docker的LNMP环境，并利用PowerShell提供在windows下的个性配置集中管理（其中根目录下的"[开始.bat](%E5%BC%80%E5%A7%8B.bat)"可一步构建docker环境，并可重启所有容器。）
 
 
 
@@ -41,14 +41,14 @@ $env:compose_volumes_base = '/Users/:/www/';
 
 
 **多进程安装扩展**  
-- 1、PHP扩展安装相关目录为[docker/php/src/](https://github.com/aogg/docker_lamp/tree/master/docker/php/src)，对应容器内路径为/usr/local/php-ext/。
+- 1、PHP扩展安装相关目录为[docker/php/src/](https://github.com/aogg/docker_lnmp/tree/master/docker/php/src)，对应容器内路径为/usr/local/php-ext/。
 
   
 在windows中可通过在[/powerShell/local.ps1](powerShell/local.ps1)文件中指定
 ```powershell
 $env:compose_build_php_configure_dir = '/usr/local/php';
 ```
-- 2、[config.json](https://github.com/aogg/docker_lamp/tree/master/docker/php/src/config.json)为所有扩展的配置文件  
+- 2、[config.json](https://github.com/aogg/docker_lnmp/tree/master/docker/php/src/config.json)为所有扩展的配置文件  
 可配置参数：
 ```json
 {
@@ -62,8 +62,8 @@ $env:compose_build_php_configure_dir = '/usr/local/php';
 	"EXT_DESC"    : "扩展描述"
 },
 ```
-- 3、[install.json](https://github.com/aogg/docker_lamp/tree/master/docker/php/src/install.json)为本次构建（build）时需要安装的扩展
-- 4、[php-ext.sh](https://github.com/aogg/docker_lamp/tree/master/docker/php/src/php-ext.sh)为安装PHP扩展的核心多线程shell脚本。平时在容器内可通过下面方式直接安装指定的多个扩展<br />
+- 3、[install.json](https://github.com/aogg/docker_lnmp/tree/master/docker/php/src/install.json)为本次构建（build）时需要安装的扩展
+- 4、[php-ext.sh](https://github.com/aogg/docker_lnmp/tree/master/docker/php/src/php-ext.sh)为安装PHP扩展的核心多线程shell脚本。平时在容器内可通过下面方式直接安装指定的多个扩展<br />
 ```shell 
 bash /usr/local/php-ext.sh memcached-2.2.0 xdebug-2.4.0
 ```
@@ -81,7 +81,7 @@ $env:compose_build_php_processes_num = 15;
 
 ## 各截图
 
-mini安装[多个扩展](https://github.com/aogg/docker_lamp/blob/a716e496d59bf408804cda1e10b970af387a62bf/docker/php/src/install.json)时间<br />
-![github](https://raw.githubusercontent.com/aogg/image_repository/master/docker_lamp/mini%E5%AE%89%E8%A3%85%E6%89%A9%E5%B1%95%E6%97%B6%E9%97%B4.png "mini安装扩展时间")
+mini安装[多个扩展](https://github.com/aogg/docker_lnmp/blob/a716e496d59bf408804cda1e10b970af387a62bf/docker/php/src/install.json)时间<br />
+![github](https://raw.githubusercontent.com/aogg/image_repository/master/docker_lnmp/mini%E5%AE%89%E8%A3%85%E6%89%A9%E5%B1%95%E6%97%B6%E9%97%B4.png "mini安装扩展时间")
   
 
