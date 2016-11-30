@@ -25,7 +25,7 @@ $env:compose_volumes_base = "${env:host_volumes_www}:/www/";
 if ($env:vmOrVirtualbox) { # v1.12下可直接判断出目录
     $env:compose_dir = "${rootPath}/../docker/";
 }else{
-    $env:compose_dir = "${env:host_volumes_www}github/docker_lamp/docker/";
+    $env:compose_dir = "${env:host_volumes_www}github/docker_lnmp/docker/";
 }
 
 # nginx conf的共享目录
