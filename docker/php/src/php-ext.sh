@@ -78,8 +78,9 @@ php_ext_main(){
     cd $root_dir;
     config_path=$root_dir/config.json
     install_path=$root_dir/install.json
-    temp_dir=$root_dir/temp
-    fifo_tmp_dir='/tmp/docker_fifo'
+    # docker的共享目录无法执行编译操作和fifo
+    temp_dir=/tmp/php-ext/temp
+    fifo_tmp_dir='/tmp/php-ext/docker_fifo'
     fifo_path=$fifo_tmp_dir/fifo_apt_update
     fifo_lock='ext_apt_update_lock'
     # 同步安装数量，使用环境变量
@@ -290,7 +291,7 @@ curl_s(){
 # 多种解压方式
 untar(){
     if [[ $1 == 'zip' ]]; then
-        unzip $2 -d $3
+        unzip -o $2 -d $3
     else
         tar -zxf "$2" -C $3
     fi

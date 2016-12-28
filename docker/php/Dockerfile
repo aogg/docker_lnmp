@@ -37,8 +37,6 @@ ARG PHP_PROCESSES_NUM=15
 
 
 
-# 安装php扩展
-COPY ./src/* ${PHP_CONFIGURE_DIR}/../php-ext/
 
 # 创建目录
 # 各国地址会不一样
@@ -86,20 +84,23 @@ RUN PHP_FILENAME="php-${PHP_VERSION}.tar.xz" \
 	# && { find /usr/local/bin /usr/local/sbin -type f -executable -exec strip --strip-all '{}' + || true; } \
 	# 删除
 	# && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false -o APT::AutoRemove::SuggestsImportant=false $BUILDDEPS \
-	&& make clean \
-	# 添加执行权限，并添加到/bin/中
-	&& chmod +x ${PHP_CONFIGURE_DIR}/../php-ext/php-ext.sh \
-	&& ln -s ${PHP_CONFIGURE_DIR}/../php-ext/php-ext.sh /bin/php-ext.sh
+	&& make clean
 
 # 添加环境变量
 ENV PATH $PHP_DIR/bin:$PHP_DIR/sbin:$PATH
 
 
+# 安装php扩展
+COPY ./src/* ${PHP_CONFIGURE_DIR}/../php-ext/
 
 ENV PHP_PROCESSES_NUM $PHP_PROCESSES_NUM
 ENV PHP_CONFIGURE_DIR $PHP_CONFIGURE_DIR
 # php-ext.sh不是一个可执行文件
-RUN /bin/bash ${PHP_CONFIGURE_DIR}/../php-ext/php-ext.sh
+# 添加执行权限，并添加到/bin/中
+RUN php_ext_sh=${PHP_CONFIGURE_DIR}/../php-ext/php-ext.sh \
+	&& chmod +x $php_ext_sh \
+	&& ln -s $php_ext_sh /bin/php-ext.sh \
+	&& /bin/bash $php_ext_sh
 
 
 
