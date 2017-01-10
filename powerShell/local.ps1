@@ -21,7 +21,7 @@ $machineArgs['bridgeadapter'] = 'Realtek PCIe GBE 系列控制器';
 # 宿主机与容器的共享目录
 $env:host_volumes_www = '/Users/';
 $env:compose_volumes_base = "${env:host_volumes_www}:/www/";
-# docker_lamp下的docker在虚拟机的路径
+# docker_lnmp下的docker在虚拟机的路径
 if ($env:vmOrVirtualbox) { # v1.12下可直接判断出目录
     $env:compose_dir = "${rootPath}/../docker/";
 }else{
