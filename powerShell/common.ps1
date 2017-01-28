@@ -70,7 +70,7 @@ $env:compose_build_nginx_args = '
 
 
 # bash的--build-arg
-$env:base_zone = 'PRC';
+$env:compose_build_base_zone = 'PRC';
 
 
 

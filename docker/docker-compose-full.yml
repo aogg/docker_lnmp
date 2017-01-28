@@ -47,7 +47,7 @@ services:
       context: ./base/
       dockerfile: Dockerfile
       args:
-        BASE_ZONE: "${base_zone}"
+        BASE_ZONE: "${compose_build_base_zone}"
     image: my-ubuntu:14.04
     container_name: "compose_base"
     # network_mode: host
