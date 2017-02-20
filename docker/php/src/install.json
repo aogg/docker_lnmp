@@ -1,5 +1,6 @@
 [
 	// "all",
+	"composer",
 	"memcache-3.0.8",
 	"memcached-2.2.0",
 	"xdebug-2.4.0",
