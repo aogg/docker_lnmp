@@ -1,0 +1,78 @@
+{
+  "name": "docker_lnmp",
+  "version": "0.1.0",
+  "description": "docker_lnmp gui on account of the electron",
+  "author": "https://github.com/aogg",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aogg/docker_lnmp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/aogg/docker_lnmp/issues"
+  },
+  "license": "Apache-2.0",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "debug": "electron . --debug -无效",
+    "server": "node ./src/webpack/webpack.server.js",
+    "build": "webpack --config ./src/webpack/webpack.config.js --display-error-details",
+    "watch": "webpack --config ./src/webpack/webpack.config.js --display-error-details -w  -无效",
+    "build-ddl": "webpack --progress --colors --config ./src/webpack/ddl.config.js",
+    "pack:help": "build --help",
+    "pack": "build --dir",
+    "dist": "build",
+    "postinstall": "cd src && npm install"
+  },
+  "build": {
+    "appId": "com.electron.aogg.docker_lnmp",
+    "asar" : false,
+    "win": {
+      "icon": "",
+      "target":"7z"
+    },
+    "nsis": {
+
+    },
+    "mac": {
+      "category": "public.app.category.utilities",
+      "icon": ""
+    },
+    "linux": {
+      "icon": ""
+    },
+    "files": [
+      "!.vscode/*",
+      "!node_modules/*"
+    ]
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "babel-cli": "^6.14.0",
+    "babel-core": "^6.14.0",
+    "babel-loader": "^6.2.5",
+    "babel-plugin-transform-runtime": "^6.15.0",
+    "babel-preset-es2015": "^6.14.0",
+    "babel-preset-stage-0": "^6.5.0",
+    "babel-runtime": "^6.11.6",
+    "colors": "^1.1.2",
+    "css-loader": "^0.25.0",
+    "electron": "^1.4.15",
+    "electron-builder": "^11.7.0",
+    "electron-packager": "^8.5.2",
+    "html-webpack-plugin": "^2.22.0",
+    "node-inspector": "^0.12.8",
+    "node-pre-gyp": "^0.6.30",
+    "style-loader": "^0.13.1",
+    "vue": "^2.1.8",
+    "vue-hot-reload-api": "^2.0.6",
+    "vue-html-loader": "^1.2.3",
+    "vue-loader": "^10.0.2",
+    "vue-router": "^2.1.1",
+    "vue-style-loader": "^1.0.0",
+    "vue-template-compiler": "^2.1.8",
+    "vuex": "^2.1.1",
+    "webpack": "^1.13.2",
+    "webpack-dev-server": "^1.16.1"
+  }
+}

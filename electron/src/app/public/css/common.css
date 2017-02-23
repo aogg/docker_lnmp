@@ -1,0 +1,69 @@
+body{
+    border: 0;
+    padding: 0;
+    margin:0;
+    background: rgb(60, 63, 65);
+}
+a{text-decoration: none;color: inherit;}
+li{list-style-type: none;}
+ul{
+    padding: 0;
+    margin: 0;
+}
+#body{
+    height: 100%;
+}
+.space-1{
+    display: inline-block;
+    width: 1%;
+}
+.dis-flex{
+    display: flex;
+}
+.nowrap{
+    white-space: nowrap;
+}
+.bg-white{
+    background: white;
+}
+.bg-green{
+    background: green;
+}
+.bg-gray{
+    background: gray;
+}
+.name-color{
+    color: rgb(199, 205, 228);
+}
+
+
+/* https://github.com/IanLunn/Hover: Pop */
+@-webkit-keyframes hvr-pop {
+    50% {
+        -webkit-transform: scale(1.2);
+        transform: scale(1.2);
+    }
+}
+@keyframes hvr-pop {
+    50% {
+        -webkit-transform: scale(1.2);
+        transform: scale(1.2);
+    }
+}
+.hvr-pop {
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-transform: perspective(1px) translateZ(0);
+    transform: perspective(1px) translateZ(0);
+    box-shadow: 0 0 1px transparent;
+}
+.hvr-pop:hover, .hvr-pop:focus, .hvr-pop:active {
+    -webkit-animation-name: hvr-pop;
+    animation-name: hvr-pop;
+    -webkit-animation-duration: 0.3s;
+    animation-duration: 0.3s;
+    -webkit-animation-timing-function: linear;
+    animation-timing-function: linear;
+    -webkit-animation-iteration-count: 1;
+    animation-iteration-count: 1;
+}
