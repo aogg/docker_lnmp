@@ -5,7 +5,7 @@ const nodeStorage = require('../core/nodeStorage');
 let symbolTemp = {};
 // const configCommand = require('./config.command');
 
-let dockerRoot = Path.join('F:/code/www/github/', './docker_lnmp/docker'); // todo 待改成自动获取
+let dockerRoot = Path.join(config.rootPath, '../docker'); // todo 待改成自动获取
 
 
 let dockerConfig = {

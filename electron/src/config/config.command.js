@@ -1,5 +1,6 @@
 // 命令相关的配置
 const os = require('os');
+const nodeStorage = require('../core/nodeStorage');
 
 let currentOs = os.type(),
     currentShellName = '',
@@ -19,7 +20,11 @@ let commandConfig = {
         get shellName(){ // 当前执行的命令的环境
             if (!currentShellName){
                 const processExec = require('../core/process.exec'); // 循环调用
-                let bool = (new processExec()).execSync('where powershell', {encoding : 'utf8'}); // 判断是否存在powershell
+                let bool = nodeStorage.getItem('powerShellBool', null);
+                if (bool === null) {
+                    bool = (new processExec()).execSync('where powershell', {encoding : 'utf8'}); // 判断是否存在powershell
+                    nodeStorage.setItem('powerShellBool', !!bool);
+                }
 
                 currentShellName = bool ? 'powershell' : 'cmd';
             }
