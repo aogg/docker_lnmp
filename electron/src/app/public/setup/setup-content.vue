@@ -110,11 +110,13 @@
             selectEnv(event){
                 let e = event.target,
                     type = this.getType(e);
-                switch(type.name){
-                    case 'windowClose':
-                        localStorage.setItem('windowClose', e.value);
+
+                switch(type.action){
+                    case 'localStorage':
+                        localStorage.setItem(type.name, e.value);
                         break;
                 }
+
                 console.log(type);
             },
             textEnv(event){
@@ -129,6 +131,9 @@
                         type.proto = (type.proto === '.' || !type.name ? type.name : `${type.proto}${type.name}`);
                         this.$root.controller('setNodeStorage', null, {proto: type.proto, value: e.value});
                         this.$store.commit('setNodeStorage', {proto: type.proto, value: e.value});
+                        break;
+                    case 'localStorage':
+                        this.$store.commit('setLocalStorage', {key: type.name, value: e.value});
                         break;
                 }
             },

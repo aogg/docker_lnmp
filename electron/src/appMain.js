@@ -48,6 +48,17 @@ window['mainVue'] = new Vue({
         };
     },
     store,
+    beforeCreate(){
+        window.addEventListener('message', (event) => {
+            if (event.data === 'fontFamily'){
+                this.$store.commit('updateFontFamily');
+            }
+
+            if (commonFunc.isObject(event.data) && event.data.source && !event.data.source.startsWith('vue-devtools')) {
+                console.log(event.data);
+            }
+        }, false);
+    },
     created(){
         this.controller('getAllNodeStorage', (val) => {
             this.$store.commit('setNodeStorage', {proto: '', value: val});
@@ -55,8 +66,9 @@ window['mainVue'] = new Vue({
 
         this.getContainerList();
     },
-    computed: {
-    },
+    computed: Vux.mapState({
+        fontFamily: 'fontFamily',
+    }),
     components: {
         windowHeader,
         App,

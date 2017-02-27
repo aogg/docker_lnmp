@@ -9,12 +9,17 @@ let containerList = Symbol('containerList');
 let setupConfig = {
     'default': [
         {
+            type: 'containerConfig',
+        },
+        {type: 'space',},
+        {
             name: '点击主窗口关闭时',
             type: 'select',
             data: ['隐藏', '关闭'],
             selected: localStorage.getItem('windowClose'),
             // json-data
             change: {
+                action: 'localStorage',
                 name: 'windowClose',
             },
         },
@@ -30,9 +35,16 @@ let setupConfig = {
                 proto: '.',
             },
         },
-        {type: 'space',},
         {
-            type: 'containerConfig',
+            name: 'font-family',
+            type: 'text',
+            get data(){
+                return localStorage.getItem('fontFamily') || window.getComputedStyle(document.getElementById('body')).fontFamily.slice(1, -2);
+            },
+            change:{
+                name: 'fontFamily',
+                action: 'localStorage'
+            },
         },
     ],
     [containerList]: [
@@ -113,7 +125,12 @@ function renderTypeHtml(data, containerData, name) {
         `;
     };
     let html = '';
-    data.change = data.change ? JSON.stringify(data.change) : '';
+    if (data.change){
+        data.change.name = data.change.name || data.name;
+        data.change = JSON.stringify(data.change)
+    }else{
+        data.change = '';
+    }
 
     switch (data.type) {
         case 'containerConfig':

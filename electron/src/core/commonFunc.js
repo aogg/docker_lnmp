@@ -111,13 +111,19 @@ module.exports = {
 
     // 转译为实体
     html2Escape(str){
-        return (str && String(str).replace(/<>&"'/g, (m) => ({
+        let map = {
             '<':'&lt;',
             '>':'&gt;',
             // '&':'&amp;',
             '"':'&quot;',
-            "'":'&apos;',
-        })[m])) || '';
+            "'": "\'", // &apos;无效
+        };
+        return (str && String(str).replace(
+            /[<>&"']/g, 
+            (m) => {
+                return map[m]
+            }
+        )) || '';
     },
 
 

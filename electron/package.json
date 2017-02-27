@@ -17,7 +17,7 @@
     "debug": "electron . --debug -无效",
     "server": "node ./src/webpack/webpack.server.js",
     "build": "webpack --config ./src/webpack/webpack.config.js --display-error-details",
-    "watch": "webpack --config ./src/webpack/webpack.config.js --display-error-details -w  -无效",
+    "watch": "webpack --config ./src/webpack/webpack.config.js --display-error-details -w",
     "build-ddl": "webpack --progress --colors --config ./src/webpack/ddl.config.js",
     "pack:help": "build --help",
     "pack": "build --dir",
