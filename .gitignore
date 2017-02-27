@@ -1,7 +1,11 @@
 # Created by .ignore support plugin (hsz.mobi)
-electron/node_modules
+# 不能用//node_modules/*
+electron/node_modules/*
+electron/src/node_modules/*
 .idea
 .vscode
-electron/temp/*
+electron/src/temp/*
 electron/npm-debug.log
 electron/npm-debug.log.*
+docker/nginx/conf/vhost/*
+docker/nginx/conf/vhost/www.baidu.dev.conf
