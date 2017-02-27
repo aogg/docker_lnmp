@@ -1,6 +1,7 @@
 # Created by .ignore support plugin (hsz.mobi)
 # 不能用//node_modules/*
-electron/node_modules/*
+electron/*/
+!electron/src/*
 electron/src/node_modules/*
 .idea
 .vscode
