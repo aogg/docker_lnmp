@@ -27,6 +27,20 @@
   "build": {
     "appId": "com.electron.aogg.docker_lnmp",
     "asar" : false,
+    "directories":{
+      "output": "app/dist",
+      "app": "./"
+    },
+    "files": [
+      "!.vscode/*",
+      "!node_modules/*"
+    ],
+    "extraResources":[
+      {
+        "from":"../docker",
+        "to":"docker"
+      }
+    ],
     "win": {
       "icon": "",
       "target":"7z"
@@ -40,11 +54,7 @@
     },
     "linux": {
       "icon": ""
-    },
-    "files": [
-      "!.vscode/*",
-      "!node_modules/*"
-    ]
+    }
   },
   "dependencies": {},
   "devDependencies": {
