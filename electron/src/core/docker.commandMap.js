@@ -14,10 +14,10 @@ let execOption = {
     commandMapHook = {[commandMapBefore]:[], [commandMapAfter]:[]};
 
 
-let docker = 'docker',
+let docker = `${dockerConfig.dockerExe}`,
     // todo -f 可改COMPOSE_FILE环境变量
-    docker_compose = `docker-compose -f "${dockerConfig.composeYml}"`, // 必须双引号
-    docker_machine = 'docker-machine';
+    docker_compose = `${dockerConfig.dockerComposeExe} -f "${dockerConfig.composeYml}"`, // 必须双引号
+    docker_machine = `${dockerConfig.dockerMachineExe}`;
 
 
 let commandMap =  {

@@ -3,6 +3,36 @@
 
 module.exports = {
 
+
+    /**
+     * 异步任务的队列
+     *
+     * @returns {Function}
+     */
+    queueAsync(){
+        let i = 0;
+        let tempCallback = null;
+
+        return function (callback, once = false) {
+            tempCallback = callback;
+            let call = function(func, bool = false){
+                if (i > 0 && (i < 2 || bool)){
+                    tempCallback(func);
+                }
+            },func = function(){
+                if (i > 1 && once){
+                    i = 1;
+                }else{
+                    --i;
+                }
+                call(func, true);
+            };
+            ++i;
+            call(func);
+        };
+    },
+
+
     /**
      * 获取data的属性proto
      */

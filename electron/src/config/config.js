@@ -5,8 +5,8 @@ let config = {
     appDev: 0, // 是否开发模式webpack-dev-server
     electorn_devtron: 1, // 开启devtron工具
     openDevTools: 0, // 是否开启开发者工具
-    dockerNodeCommandLog: false, // 执行docker命令之后的console.log是否显示在命令行中
-    processExecCommandLog: false, // 执行命令的console.log是否显示在命令行中
+    dockerNodeCommandLog: false, // 执行命令之 后 的console.log是否显示在命令行中
+    processExecCommandLog: false, // 执行命令之 前 的console.log是否显示在命令行中
 
 
 

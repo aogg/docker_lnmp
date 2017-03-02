@@ -2,6 +2,7 @@
 const Path = require('path');
 const commonFunc = require('../core/commonFunc');
 const nodeStorage = require('../core/nodeStorage');
+const configCommand = require('../config/config.command');
 let symbolTemp = {};
 // const configCommand = require('./config.command');
 
@@ -15,6 +16,15 @@ let dockerConfig = {
     hostName:'default',
     get composeYml(){
         return Path.join(dockerRoot, 'docker-compose-powershell.yml');
+    },
+    get dockerExe(){
+        return configCommand.whereCommand('docker', 'config-exe.docker', null, true);
+    },
+    get dockerComposeExe(){
+        return configCommand.whereCommand('docker-compose', 'config-exe.docker-compose', null, true);
+    },
+    get dockerMachineExe(){
+        return configCommand.whereCommand('docker-machine', 'config-exe.docker-machine', null, true);
     },
     machineArgs: {
         driver: 'virtualbox',

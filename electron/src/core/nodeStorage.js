@@ -6,8 +6,9 @@ let CounterClass = new Counter('nodeStorage');
 let options = {
     encoding: 'utf8',
     flag: 'r',
-}
-let data = {};
+},
+    queue = commonFunc.queueAsync(),
+    data = {};
 
 
 
@@ -27,11 +28,22 @@ module.exports = {
         return commonFunc.getObjectProto(data, proto, defaultData);
     },
     setItem(proto, value){
-        proto = (typeof proto === 'string'? proto.split('.') :proto) || [];
-        if (proto[0]){// 只处理一层
-            CounterClass.update(proto[0]);
+        proto = (typeof proto === 'string'? proto.split('.') : proto) || [];
+        if (proto[0]){
+            CounterClass.update(proto[0]); // 只处理一层
             data = commonFunc.setObjectProto(data, proto, value);
-            fs.writeFile(config.nodeStoragePath, JSON.stringify(data), options);
+
+            queue(function (func) {
+                fs.writeFile(
+                    config.nodeStoragePath,
+                    1 ? JSON.stringify(data, null, '\t') : JSON.stringify(data), // 是否美化json
+                    options,
+                    function () {
+                        func();
+                        func = null;
+                    }
+                );
+            }, true);
         }
     },
     // 判断返回值是否相等

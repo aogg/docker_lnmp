@@ -1,10 +1,17 @@
 // 命令相关的配置
 const os = require('os');
 const nodeStorage = require('../core/nodeStorage');
+const emptySymbol = Symbol();
 
 let currentOs = os.type(),
     currentShellName = '',
     proxyConfig = {};
+
+
+function processExec() {
+    const processExec = require('../core/process.exec'); // 循环调用
+    return new processExec('config.commnad');
+}
 
 
 
@@ -17,16 +24,13 @@ let commandConfig = {
 
             return  'cmd';
         },
+        checkPowerShell(){
+            return proxyConfig.whereCommand('powershell', 'powerShellBool', str => !!str, false, false) !== 'powershell';
+        },
         get shellName(){ // 当前执行的命令的环境
             if (!currentShellName){
-                const processExec = require('../core/process.exec'); // 循环调用
-                let bool = nodeStorage.getItem('powerShellBool', null);
-                if (bool === null) {
-                    bool = (new processExec()).execSync('where powershell', {encoding : 'utf8'}); // 判断是否存在powershell
-                    nodeStorage.setItem('powerShellBool', !!bool);
-                }
 
-                currentShellName = bool ? 'powershell' : 'cmd';
+                currentShellName = this.checkPowerShell() ? 'powershell' : 'cmd';
             }
 
             return currentShellName;
@@ -97,12 +101,65 @@ let commandConfig = {
             // todo 待改为git的bash，记得有部分功能有用
             return `start ${dockerConfig.bashCommandPath} -s -c '${command} ;read'`;
         }else if(environment === 'powershell'){
-            command = `echo '${command}';${command}`; // 输出执行命令
-            command = command.replace(/([^`])"/g, "$1`\"");
+            command = `echo '${command.replace(/(^`)'/g, "$1''")}';${command}`; // 输出执行命令
+            command = command.replace(/([^`])"/g, "$1\"\"\"\"\"\""); // 转双引号需要三对双引号
             // return `start powershell -NoExit ${docker_compose} logs ${logsArgs} ${getContainerName()}`; // cmd下打开powershell
             return `start powershell -ArgumentList "-NoExit ${command}"`; // powershell打开powershell
         }
-    }
+    },
+    linux:{
+    },
+
+    /**
+     * 查看command命令所在路径
+     *
+     * @param {string} command 命令名
+     * @param {string} cacheKey 缓存
+     * @param {callback} cacheFunc 缓存结果特殊处理
+     * @param {bool} async 是否异步保存缓存
+     * @param {bool} checkPowerShell 是否特殊处理执行绝对路径命令
+     * @returns {string}
+     */
+    whereCommand(command, cacheKey = '', cacheFunc = null, async = false, checkPowerShell = true){ // where npm
+        let str, check;
+        if (cacheKey && (str = nodeStorage.getItem(cacheKey, emptySymbol)) !== emptySymbol){
+            return str;
+        }
+        function disFunc(str) { // 处理返回的str
+            if (str){
+                str = proxyConfig.lineArr(str).shift();
+                if (checkPowerShell && (check = proxyConfig.checkPowerShell) && check()) { // 是powershell，需&"C:\Program Files\Docker\Docker\Resources\bin\docker-compose.exe"
+                    str = '&"' + str + '"';
+                }else{
+                    str = '"' + str + '"';
+                }
+            }
+
+            if (cacheKey){ // 不考虑str
+                str = typeof cacheFunc === 'function' ? cacheFunc(str) : str;
+                nodeStorage.setItem(cacheKey, str);
+            }
+
+            return str;
+        }
+
+        if (async) { // 异步
+            setTimeout(function () {
+                processExec().exec(`where ${command}`, {encoding : 'utf8'}, function (error, stdout, stderr) {
+                    if (error){
+                        console.error(`where ${command} error: ${stderr}`);
+                        return;
+                    }
+
+                    return disFunc(stdout);
+                });
+            }, 0);
+
+            return async === true ? command : async;
+        }
+
+        return disFunc(processExec().execSync(`where ${command}`, {encoding : 'utf8'}));
+    },
 };
 
 
