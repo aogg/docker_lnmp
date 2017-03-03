@@ -98,6 +98,16 @@ module.exports = {
         return data && typeof data === 'object';
     },
 
+    /**
+     * 判断对象是否为空，true为空
+     *
+     * @param data
+     * @returns {boolean}
+     */
+    emptyObject(data){
+        return this.isObject(data) && Object.getOwnPropertyNames(data).length !== 0;
+    },
+
 
     /**
      * 递归判断对象是否存在指定的多个属性

@@ -38,6 +38,21 @@ let dockerConfig = {
         },
         other: '', // 其他更多参数
     },
+    get execOption(){ // 执行命令时的参数，todo 待整理
+        return {
+            cwd: this.execCwd,
+            env: this.execEnv,
+        };
+    },
+    get execEnv(){ // 执行exec时的env
+        let temp = {};
+        // 转多层数据为一层
+        for (let k in this.env){
+            Object.assign(temp, typeof this.env[k] !== 'object'?{[k]: this.env[k]}:this.env[k]);
+        }
+
+        return Object.assign(temp, this.env)
+    },
     get configEnv(){ // 不获取process.env
         // 如出现getter的问题，可通过JSON.stringify
         return this.env;
@@ -135,16 +150,6 @@ let dockerConfig = {
 
 module.exports = new Proxy(dockerConfig, {
     get:(target, key) => {
-        if (key === 'env' && Reflect.has(target, key)){ // env需要拿到当前用户的env
-            let temp = {};
-            // 转多层数据为一层
-            for (let k in target[key]){
-                Object.assign(temp, typeof target[key][k] !== 'object'?{[k]: target[key][k]}:target[key][k]);
-            }
-
-            return Object.assign(temp, process.env);
-        }
-
         return Reflect.has(target, key) ? target[key] : false;
     },
 

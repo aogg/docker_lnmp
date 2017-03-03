@@ -3,10 +3,7 @@ const configCommand = require('../config/config.command');
 const util = require('util');
 
 
-let execOption = {
-        env: dockerConfig.env,
-        cwd: dockerConfig.execCwd,
-    },
+let execOption = dockerConfig.execOption,
     tempData = {}, // 临时数据
     commandArg = {}, // 用于当前模块，保存传递过来的arg
     commandMapBefore = Symbol('commandMapBefore'), // 连接，返回命令前
@@ -194,7 +191,7 @@ let commandMap =  {
     //     command:'dir', // 数组内必须
     //
     //     noHook:true, // 不使用commandMapBefore和commandMapAfter
-    //     execData:function (data) { // 处理返回的结果
+    //     returnData:function (data) { // 处理返回的结果
     //
     //     },
     //     execOption:{

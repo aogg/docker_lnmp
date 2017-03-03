@@ -36,7 +36,7 @@ class pExec{
             this[dataInitSymbol]();
             cmd.setData(shellName, this.exec(configCommand.execShellName, {
                 cwd: dockerConfig.execCwd,
-                env: dockerConfig.env,
+                env: dockerConfig.execEnv,
             }));
             // cp_execSync('start powershell \n');
             // cmd.stdin.write('start cmd \n');

@@ -17,6 +17,13 @@ function processExec() {
 
 let commandConfig = {
     windows:{
+        execShellNameSync(command){ // 同步执行前缀
+            if (this.shellName === 'powershell') {
+                return `powershell -Command "${command.replace(/([^`])"/g, "$1\"\"\"\"")}"`;
+            }
+
+            return  command;
+        },
         get execShellName (){ // child_process.exec
             if (this.shellName === 'powershell') { // 在powershell中不输出目录
                 return 'powershell -NoLogo -Command -';

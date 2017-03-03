@@ -4,7 +4,7 @@ let nd = new NodeDocker();
 
 function dockerExec(command, arg = null){
     // IpcMain.send(onName, dockerParam(command, 'sync', arg));
-    nd.execDocker('sync', command, arg);
+    nd.execDocker('async', command, arg);
 }
 
 
@@ -56,7 +56,7 @@ module.exports = {
         },
         {
             label:'启动/重启',
-            accelerator:'Ctrl+R',
+            accelerator:'Ctrl+E',
             click: function(){
                 dockerExec('docker-compose/restart');
             },

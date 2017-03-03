@@ -2,6 +2,7 @@
 
 const configCommand = require('../config/config.command');
 const dockerConfig = require('../config/config.docker');
+const commonFunc = require('./commonFunc');
 const Error = require('./error.js');
 const fs = require('fs'); // 调试写文件
 const os = require('os');
@@ -79,7 +80,7 @@ class NodeDocker {
     execDocker(type, name, args) {
         this.currentExecArgs = args;
 
-        if (type !== 'sync') { // 异步
+        if (type !== 'sync') { // 异步 async
             this.exec(name, args, this.execDockerAsync);
         } else { // 同步 sync
             let value = this.exec(name, args, null);
@@ -174,13 +175,27 @@ class NodeDocker {
             // this.cmdExec(command, commandData.execOption, asyncFunc);
 
             // return true;
-        } else { // 同步
-            let data = this.pe.execSync(command, this.getCommandData().execOption);
-            if (this.getCommandData().hasOwnProperty('execData') && typeof this.getCommandData().execData === 'function') { // 自定义处理函数
+        } else { // 同步执行会影响整个electron主进程
+            command = configCommand.execShellNameSync(command);
+            console.log('sync exec command: ' + command);
+
+            let tempOption = Object.assign({}, this.getCommandData().execOption || {}), // 取消一层引用
+                option = dockerConfig.execOption;
+            if (!commonFunc.emptyObject(tempOption.env)) { // 处理env对象
+                option.env = Object.assign(option.env, tempOption.env);
+                Reflect.deleteProperty(tempOption, 'env');
+            }
+
+            let data = this.pe.execSync(
+                command,
+                Object.assign(option,  tempOption)
+            );
+            if (this.getCommandData().hasOwnProperty('returnData') && typeof this.getCommandData().returnData === 'function') { // 自定义处理函数
                 return this.getCommandData().execData(data);
             } else {
-                const iconv = require('iconv-lite');
-                return iconv.decode(data, 'GBK');
+                // const iconv = require('iconv-lite');
+                // data= data ? iconv.decode(data, 'GBK') : ''; // 未测试
+                return data;
             }
         }
     }
