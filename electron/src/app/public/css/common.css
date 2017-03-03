@@ -57,7 +57,7 @@ ul{
     transform: perspective(1px) translateZ(0);
     box-shadow: 0 0 1px transparent;
 }
-.hvr-pop:hover, .hvr-pop:focus, .hvr-pop:active {
+.hvr-pop:hover, .hvr-pop:focus {
     -webkit-animation-name: hvr-pop;
     animation-name: hvr-pop;
     -webkit-animation-duration: 0.3s;
@@ -67,3 +67,24 @@ ul{
     -webkit-animation-iteration-count: 1;
     animation-iteration-count: 1;
 }
+
+
+.hvr-pop:active{
+    /*.hvr-bounce-out*/
+    animation-name: hvr-bounce-out;
+    -webkit-transform: scale(0.8);
+    transform: scale(0.8);
+    /*会有抖动*/
+    /*-webkit-transition-timing-function: cubic-bezier(0.47, 2.02, 0.31, -0.36);*/
+    /*transition-timing-function: cubic-bezier(0.47, 2.02, 0.31, -0.36);*/
+
+    margin-left: -0.8%;
+
+    font-weight: 600;
+
+
+    box-shadow: 0 0 1px transparent;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+}
+
