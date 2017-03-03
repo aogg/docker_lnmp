@@ -11,6 +11,7 @@
 ## 说明
 一个基于[docker](https://www.docker.com/)的LNMP环境，并利用[electron](https://electron.atom.io/) + [vue](https://cn.vuejs.org/) 提供gui管理（目前只处理了window环境，后续支持linux和mac）
 
+<br />其中gui界面通过[electron](https://electron.atom.io/)+[webpack](http://webpack.github.io/)+[vue](https://cn.vuejs.org/)+[babel](http://babeljs.cn/)实现。
 
 
 ## 使用
