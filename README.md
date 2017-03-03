@@ -1,11 +1,6 @@
 # 基于docker的LNMP环境
-[![npm](https://img.shields.io/badge/npm-passing-brightgreen.svg)](https://www.npmjs.com/)
-[![npm](https://img.shields.io/badge/electron-passing-brightgreen.svg)](https://electron.atom.io/)
-[![npm](https://img.shields.io/badge/docker-passing-brightgreen.svg)](https://www.docker.com/)
-[![npm](https://img.shields.io/badge/vue-passing-brightgreen.svg)](https://cn.vuejs.org/)
-[![npm](https://img.shields.io/badge/node-passing-brightgreen.svg)]()
-[![npm](https://img.shields.io/badge/webpack-passing-brightgreen.svg)]()
-[![npm](https://img.shields.io/badge/babel-passing-brightgreen.svg)]()
+[![npm](https://img.shields.io/badge/npm-passing-brightgreen.svg)](https://www.npmjs.com/) [![npm](https://img.shields.io/badge/electron-passing-brightgreen.svg)](https://electron.atom.io/) [![npm](https://img.shields.io/badge/docker-passing-brightgreen.svg)](https://www.docker.com/) [![npm](https://img.shields.io/badge/vue-passing-brightgreen.svg)](https://cn.vuejs.org/) [![npm](https://img.shields.io/badge/node-passing-brightgreen.svg)]()
+[![npm](https://img.shields.io/badge/webpack-passing-brightgreen.svg)]() [![npm](https://img.shields.io/badge/babel-passing-brightgreen.svg)]()
 
 
 ## 说明
