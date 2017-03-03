@@ -14,15 +14,15 @@ module.exports = {
         let tempCallback = null;
 
         return function (callback, once = false) {
-            tempCallback = callback;
-            let call = function(func, bool = false){
-                if (i > 0 && (i < 2 || bool)){
-                    tempCallback(func);
+            once && (tempCallback = callback);
+            let call = function (func, bool = false) {
+                if (i > 0 && (i < 2 || bool)) {
+                    once ? tempCallback(func) : callback(func);
                 }
-            },func = function(){
-                if (i > 1 && once){
+            }, func = function () {
+                if (once && i > 1) {
                     i = 1;
-                }else{
+                } else {
                     --i;
                 }
                 call(func, true);
