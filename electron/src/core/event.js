@@ -134,12 +134,29 @@ eventConfig = { // todo 待，通过get()将处理逻辑放入对象内
             };
             eventsData.execDocker('async', 'docker-compose/ps-events', {'callbackName' : eventsName});
         },
+        firstStart(){ // 首次运行
+            const nodeStorage = require('./nodeStorage');
+
+            if (!nodeStorage.getItem('firstStartEvents')) {
+                process.nextTick(function () {
+                    Promise
+                        .all(
+                            new Promise(function (resolve, reject) { // 检查vmOrVirtualBox
+
+                            })
+                        )
+                        .then(function () {
+                            // nodeStorage.setItem('firstStartEvents', 1);
+                        });
+                })
+            }
+        },
     },
 
 
     'app-window-all-closed':{
         tray() {
-            // appIcon.destroy();
+            appIcon.destroy();
         }
     },
 

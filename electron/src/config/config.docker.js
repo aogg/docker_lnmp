@@ -121,7 +121,7 @@ let dockerConfig = {
 
 
             // 特殊处理
-            vmOrVirtualbox:'', // todo
+            // vmOrVirtualBox:'', // todo
 
 
             // 其他
