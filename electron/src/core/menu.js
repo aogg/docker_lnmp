@@ -65,7 +65,7 @@ module.exports = {
     trayMenu: [
         {
             label:'启动/重启',
-            accelerator:'Ctrl+R',
+            accelerator:'Ctrl+E',
             click: function(){
                 dockerExec('docker-compose/restart');
             },
