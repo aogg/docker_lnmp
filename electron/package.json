@@ -26,10 +26,16 @@
   },
   "build": {
     "appId": "com.electron.aogg.docker_lnmp",
-    "asar" : false,
-    "directories":{
-      "output": "app/dist",
-      "app": "./"
+    "asar": [
+      "./src/*",
+      "asar相关无效",
+      "electron升级到v1.6后，改为false又会报错"
+    ],
+    "asarUnpack": [
+      "!./src/*"
+    ],
+    "directories": {
+      "output": "app/dist"
     },
     "files": [
       "!.vscode/*",
