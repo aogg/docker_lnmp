@@ -85,7 +85,7 @@
 	{
 		"EXT_INSTALL" : 0,
 		"EXT_NAME"    : "fastdfs-5.08",
-		"EXT_URL"     : "http://sourceforge.mirrorservice.org/f/fa/fastdfs/FastDFS%20Server%20Source%20Code/FastDFS%20Server%20with%20PHP%20Extension%20Source%20Code%20V5.08/FastDFS_v5.08.tar.gz",
+		"EXT_URL"     : "https://nchc.dl.sourceforge.net/project/fastdfs/FastDFS%20Server%20Source%20Code/FastDFS%20Server%20with%20PHP%20Extension%20Source%20Code%20V5.08/FastDFS_v5.08.tar.gz",
 		"EXT_DEPEND"  : "",
 		"EXT_ARG"     : "",
 		"EXT_EVAL"    : "cd $temp_dir && curl_s \"https://codeload.github.com/happyfish100/libfastcommon/zip/master\" \"libfastcommon.zip\" && unzip -o 'libfastcommon.zip' && rm 'libfastcommon.zip' && cd ./libfastcommon-master/ && ./make.sh && ./make.sh install && cd .. && cd ./fastdfs-5.08/FastDFS && ./make.sh && ./make.sh install && cd .."
