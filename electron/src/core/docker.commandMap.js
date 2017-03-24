@@ -28,7 +28,7 @@ let commandMap =  {
         //     return getContainerName();
         // },
         //
-        // version:`${docker} -v`,
+        v:`-v`,
         // up: 'up', // 启动
         // restart: 'restart', // 重启
         // stop: 'stop', // 停止

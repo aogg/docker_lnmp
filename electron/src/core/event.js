@@ -140,16 +140,25 @@ eventConfig = { // todo 待，通过get()将处理逻辑放入对象内
             if (!nodeStorage.getItem('firstStartEvents')) {
                 process.nextTick(function () {
                     Promise
-                        .all(
+                        .all([
                             new Promise(function (resolve, reject) { // 检查vmOrVirtualBox
-                                
+                                const NodeDocker = require('./docker.node.js');
+                                let dockerNode = new NodeDocker();
+                                dockerNode.localSend = function (msg, name, error){
+                                    if (error){ // 非docker-machine管理
+                                        resolve({name: 'docker/v', data: 0});
+                                    }else{
+                                        resolve({name: 'docker/v', data: 1});
+                                    }
+                                };
+                                dockerNode.execDocker('async', 'docker/v', {});
                             })
-                        )
+                        ])
                         .then(function () {
                             // nodeStorage.setItem('firstStartEvents', 1);
                         })
                         .catch(function (){
-                            // 必须要有catch
+                            // 
                         });
                 })
             }
