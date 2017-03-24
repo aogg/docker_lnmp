@@ -142,11 +142,14 @@ eventConfig = { // todo 待，通过get()将处理逻辑放入对象内
                     Promise
                         .all(
                             new Promise(function (resolve, reject) { // 检查vmOrVirtualBox
-
+                                
                             })
                         )
                         .then(function () {
                             // nodeStorage.setItem('firstStartEvents', 1);
+                        })
+                        .catch(function (){
+                            // 必须要有catch
                         });
                 })
             }
