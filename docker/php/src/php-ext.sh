@@ -367,7 +367,7 @@ function processes_reset_fifo(){
 
 # 执行
 start_time=`date "+%s"`
-root_dir=$(cd $(dirname $0);pwd)
+root_dir=$(cd $(dirname $(readlink -f $0));pwd)
 log_fd='/dev/null'
 # 支持 ./php-ext.sh curl
 if [[ $# > 0 ]]; then
