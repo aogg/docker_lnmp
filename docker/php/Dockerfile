@@ -99,7 +99,7 @@ ENV PHP_CONFIGURE_DIR $PHP_CONFIGURE_DIR
 # 添加执行权限，并添加到/bin/中
 RUN php_ext_sh=${PHP_CONFIGURE_DIR}/../php-ext/php-ext.sh \
 	&& chmod +x $php_ext_sh \
-	&& ln -s $php_ext_sh /bin/php-ext.sh \
+	&& ln -s $php_ext_sh /usr/local/bin/php-ext.sh \
 	&& /bin/bash $php_ext_sh
 
 
