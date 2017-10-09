@@ -3,6 +3,10 @@
 # sudo rm -rf /etc/apt/sources.list.d/ /var/lib/apt/lists/partial/  && apt update
 # set -e
 
+
+
+
+
 # 安装函数
 function install_so(){
     {
@@ -13,6 +17,16 @@ function install_so(){
             apt_get_fifo
         fi
 
+
+
+        processes_get_fifo
+
+        # 检测依赖扩展
+        if [[ $install_json_bool > 0 ]];then
+            check_not_installed "$EXT_SORT"
+        fi
+
+        echo -e "\e[1;1m ==========================${EXT_NAME}开始===================== \e[0m" 1>&2
 
     	if [[ -d $EXT_TGZ_DIR ]]; then
     		tag_dir=$EXT_TGZ_DIR
@@ -25,13 +39,13 @@ function install_so(){
             curl_s "$EXT_URL" "${tar_file_path}"
             
     		untar $EXT_URL_TYPE ${tar_file_path} $tag_dir
-    		# 删除压缩包
-    		rm -rf "${tag_dir}.tgz"
+
+            if [[ $install_json_bool > 0 ]];then
+                # 删除压缩包
+                rm -rf "${tag_dir}.tgz"
+            fi
     	fi
 
-
-        processes_get_fifo
-        echo -e "\e[1;1m ==========================${EXT_NAME}开始===================== \e[0m" 1>&2
 
         ext_no_make=0
         if ext_config_value_exists $EXT_EVAL; then
@@ -53,9 +67,11 @@ function install_so(){
             ./configure $EXT_ARG
             make && make install
 
-            # 删除网络包
-            if [[ ! -d $EXT_TGZ_DIR ]]; then
+            # 删除网络包，install.json安装时才删除
+            if [[ (! -d $EXT_TGZ_DIR) && $install_json_bool > 0 ]]; then
                 rm -fr $tag_dir
+            else
+                echo '==============================='$tag_dir'============================' 1>&2
             fi
         fi
 
@@ -67,6 +83,8 @@ function install_so(){
 	# cp $(php-config --extension-dir)/* $(php -r 'echo ini_get("extension_dir");')
 	
 	echo -e "\e[1;33m ==========================${EXT_NAME}完成===================== \e[0m"
+
+    echo "$EXT_NAME" >> $installed_path
 }
 
 
@@ -77,29 +95,35 @@ php_ext_main(){
     # 保持目录
     cd $root_dir;
     config_path=$root_dir/config.json
-    install_path=$root_dir/install.json
+    install_json_path=$root_dir/install.json
     # docker的共享目录无法执行编译操作和fifo
     temp_dir=/tmp/php-ext/temp
     fifo_tmp_dir='/tmp/php-ext/docker_fifo'
     fifo_path=$fifo_tmp_dir/fifo_apt_update
+    installed_path=$fifo_tmp_dir/file_installed
     fifo_lock='ext_apt_update_lock'
     # 同步安装数量，使用环境变量
     processes_num=${PHP_PROCESSES_NUM:-15}
     processes_path=$fifo_tmp_dir/fifo_processes
+    install_json_bool=1 # 是否通过install.json安装，默认是，否为通过指定扩展安装
+
 
     mkdir -p ${temp_dir} ${fifo_tmp_dir}
+    touch $installed_path
+    echo '' > $installed_path; # 清空
 
     # 判断文件是否存在
     if [[ -f ${config_path} ]]; then
         # config.json内容
         # @todo 待优化为(?<!:)，不支持url中包含#的，同时处理/usr/local/php，使用环境变量
         config_json_text=`grep -v -E "#|([^:]//)|(^//)" ${config_path} | sed "s#\/usr\/local\/php\/#${PHP_CONFIGURE_DIR}\/#g"`
-        num=$(echo ${config_json_text} | jq '.|length')
+        configNum=$(echo ${config_json_text} | jq '.|length')
         if [[ $1 ]]; then
+            install_json_bool=0
             install_json_text=$1
-        elif [[ -f ${install_path} ]]; then
+        elif [[ -f ${install_json_path} ]]; then
             # install.json内容
-            install_json_text=`grep -v -E "#|//" ${install_path}`
+            install_json_text=`grep -v -E "#|//" ${install_json_path}`
         fi
 
         # 在docker的数据卷中无法mkfifo
@@ -117,7 +141,8 @@ php_ext_main(){
 
         install_ext_depend
 
-        for (( i = 0; i < $num; i++ )); do
+        # 循环安装
+        for (( i = 0; i < $configNum; i++ )); do
             # 保持目录
             cd $root_dir;
             #判断是否安装
@@ -125,8 +150,10 @@ php_ext_main(){
             # 目录名，扩展名
             EXT_NAME=$(echo ${config_json_text} | jq -r ".[$i].EXT_NAME");
 
-            if [[ ! -f ${install_path} && $EXT_INSTALL != 1 ]] || \
-             [[ -f ${install_path} && ! ( \
+            if [[ ! -f ${install_json_path} && $EXT_INSTALL != 1 ]] || \
+             # 已安装
+             [[ $(grep "${EXT_NAME}" $installed_path | wc -l) < 0 ]] || \
+             [[ -f ${install_json_path} && ! ( \
                 $(echo ${install_json_text} | jq -r ".[0]") == 'all' || \
                 $(echo ${install_json_text} | jq -r ".[]" | grep -e "^${EXT_NAME}$") \
               ) ]]; then
@@ -138,6 +165,8 @@ php_ext_main(){
 
             # 下载文件地址
             EXT_URL=$(echo ${config_json_text} | jq -r ".[$i].EXT_URL");
+            # 安装顺序
+            EXT_SORT=$(echo ${config_json_text} | jq -r ".[$i][\"EXT_SORT\"]");
             # 编译参数
             EXT_ARG=$(echo ${config_json_text} | jq -r ".[$i].EXT_ARG"  | sed 's/^null$//i');
             # 已有的源码路径，用于安装如mysqli这类在php安装包里自带有源码扩展的扩展
@@ -169,9 +198,9 @@ install_ext_depend(){
     local ext_depend=''
     local temp_ext_depend=''
     local ext_depend_num=0
-    # [[ -f ${install_path} && ! ($(echo ${install_json_text} | jq -r ".[0]") == 'all' ||
+    # [[ -f ${install_json_path} && ! ($(echo ${install_json_text} | jq -r ".[0]") == 'all' ||
     # $(echo ${install_json_text} | jq -r ".[]" | grep -e "^${EXT_NAME}$")) ]]
-    if [[ -f ${install_path} && $(echo ${install_json_text} | jq -r ".[0]") == 'all' ]]; then
+    if [[ -f ${install_json_path} && $(echo ${install_json_text} | jq -r ".[0]") == 'all' ]]; then
         # 安装所有
         ext_depend=`echo ${config_json_text} | jq -r '.[].EXT_DEPEND' | tr -s "\n" " "`
         ext_depend_num=`echo ${config_json_text} | jq -r '.[].EXT_DEPEND' | grep -v -e "^\s*$" | wc -l`
@@ -179,10 +208,10 @@ install_ext_depend(){
 
         for (( i = 0; i < $num; i++ )); do
             temp_ext_depend=$(echo $(echo ${config_json_text} | jq -r ".[$i].EXT_DEPEND"))
-
+    
             # 目录名，扩展名
             temp_ext_name=$(echo ${config_json_text} | jq -r ".[$i].EXT_NAME");
-            if [[ ! -f ${install_path} && $(echo ${config_json_text} | jq -r ".[$i].EXT_INSTALL") != 1 ]] || ([[ -f ${install_path} && $(echo ${install_json_text} | jq -r ".[]" | grep -e "^${temp_ext_name}$") ]] && ext_config_value_exists $temp_ext_depend ); then
+            if [[ ! -f ${install_json_path} && $(echo ${config_json_text} | jq -r ".[$i].EXT_INSTALL") != 1 ]] || ([[ -f ${install_json_path} && $(echo ${install_json_text} | jq -r ".[]" | grep -e "^${temp_ext_name}$") ]] && ext_config_value_exists $temp_ext_depend ); then
                 ext_depend+=' '${temp_ext_depend}
                 ((ext_depend_num++))
             fi
@@ -299,6 +328,43 @@ untar(){
 
 
 
+function check_not_installed(){
+    local val;
+
+    if ! ext_config_value_exists "$1"; then
+        # 可以安装
+        return 1
+    fi
+
+    local check_arr=$(echo $1|jq -r ".[]")
+
+    for val in $check_arr; do
+        if [[ `grep "${val}" ${installed_path} | wc -l` < 1 ]]; then
+        cat $installed_path 1>&2;
+        echo $val 1>&2;
+            processes_reset_fifo "$EXT_NAME"
+            check_not_installed "$1"
+            return;
+        fi
+        echo 'success install'; 1>&2;
+        echo $val 1>&2;
+    done
+
+    return 1
+}
+
+
+
+function processes_reset_fifo(){
+    processes_write_fifo
+    echo '重新构建'$1 1>&2;
+    sleep 1
+    processes_get_fifo
+}
+
+
+
+
 # 执行
 start_time=`date "+%s"`
 root_dir=$(cd $(dirname $0);pwd)
@@ -324,5 +390,5 @@ fi
 
 let end_time=`date "+%s"`-start_time
 
-echo "\e[30;46m ---------------------------------Time : "${end_time}"--------------------------------------- \e[0m"
+echo -e "\e[30;46m ---------------------------------Time : "${end_time}"--------------------------------------- \e[0m"
 echo 

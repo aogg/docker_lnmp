@@ -10,7 +10,7 @@
 	"mongodb-1.1.9",
 	// "ioncube-5.5",
 	"phalcon",
-	"swoole-1.8.6-stable",
+	"swoole-2.0.9",
 	"xhprof-0.9.4",
 	"php_zip",
 	"amqp-1.4.0",

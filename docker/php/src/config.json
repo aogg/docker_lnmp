@@ -5,7 +5,8 @@
 	// 	"EXT_NAME"    : "扩展名称",
 	// 	"EXT_URL"     : "扩展下载地址",
 	// 	"EXT_TGZ_DIR" : "不下载直接用本地目录",
-	// 	"EXT_DEPEND"  : "扩展对应依赖",
+	// 	"EXT_DEPEND"  : "扩展对应apt依赖",
+	//  "EXT_SORT"    : ["扩展安装顺序"],
 	// 	"EXT_ARG"	  : "扩展编译时参数",
 	// 	"EXT_EVAL"	  : "扩展下载完成后执行的代码",
 	// 	"EXT_DESC"	  : "扩展描述"
@@ -69,9 +70,11 @@
 	},
 	{
 		"EXT_INSTALL" : 0,
-		"EXT_NAME"    : "swoole-1.8.6-stable",
-		"EXT_URL"     : "https://codeload.github.com/swoole/swoole-src/tar.gz/1.8.6-stable",
-		"EXT_DEPEND"  : "",
+		"EXT_NAME"    : "swoole-2.0.9",
+		"EXT_URL"     : "https://codeload.github.com/swoole/swoole-src/tar.gz/v2.0.9",
+		"EXT_ARG"     : "--enable-coroutine --enable-openssl --enable-async-redis",
+		"EXT_SORT"    : ["openssl"],
+		"EXT_DEPEND"  : "libhiredis-dev",
 		"EXT_EVAL"    : ""
 	},
 	{
@@ -144,7 +147,7 @@
 		"EXT_URL"     : "http://pecl.php.net/get/svn-1.0.2.tgz",
 		"EXT_DEPEND"  : "libsvn-dev",
 		"EXT_ARG"     : "",
-		"EXT_DESC"    : "php-5.5可安装"
+		"EXT_DESC"    : "php-4.0以上，6.0一下"
 	},
 	// {
 	// 	"EXT_INSTALL" : 0,
@@ -154,6 +157,13 @@
 	// 	// "EXT_DESC"    : "",
 	// 	"EXT_ARG"     : ""
 	// },
+	{
+		"EXT_INSTALL" : 0,
+		"EXT_NAME"    : "swoole-1.8.6-stable",
+		"EXT_URL"     : "https://codeload.github.com/swoole/swoole-src/tar.gz/1.8.6-stable",
+		"EXT_DEPEND"  : "",
+		"EXT_EVAL"    : ""
+	},
 	{
 		"EXT_INSTALL" : 0,
 		"EXT_NAME"    : "openssl",
