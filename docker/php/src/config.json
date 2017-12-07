@@ -74,7 +74,7 @@
 		"EXT_URL"     : "https://codeload.github.com/swoole/swoole-src/tar.gz/v2.0.9",
 		"EXT_ARG"     : "--enable-coroutine --enable-openssl --enable-async-redis",
 		"EXT_SORT"    : ["openssl"],
-		"EXT_DEPEND"  : "libhiredis-dev",
+		"EXT_DEPEND"  : "libhiredis-dev libz-dev",
 		"EXT_EVAL"    : ""
 	},
 	{
