@@ -57,6 +57,7 @@ let commandMap =  {
         //     },
         // },
         'events': {
+            // todo 有第一次up时，gui无法正确监听（通过rm后up）
             command: function (command){
                 let str = '';
                 if (command.args.length){

@@ -1,6 +1,7 @@
 version: '2'
 services:
     common_nginx_aliases:
+      # 当使用virtualBox的时候就需要在这里填写
       # 本地nginx项目填写在这
       networks:
         all:

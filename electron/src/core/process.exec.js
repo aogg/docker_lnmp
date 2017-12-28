@@ -28,12 +28,13 @@ class pExec{
         this.args = [];
     }
 
-    shell(){
-        // console.log(Object.keys(cmd));
+
+    shellInit(){
         let shellName = this.shellName;
         if (!cmd.getData(shellName)){
             config.processExecCommandLog && console.log(`open process : ${shellName}`);
             this[dataInitSymbol]();
+            // 系统环境变量没有了
             cmd.setData(shellName, this.exec(configCommand.execShellName, {
                 cwd: dockerConfig.execCwd,
                 env: dockerConfig.execEnv,
@@ -41,6 +42,13 @@ class pExec{
             // cp_execSync('start powershell \n');
             // cmd.stdin.write('start cmd \n');
         }
+    }
+
+
+    shell(){
+        // console.log(Object.keys(cmd));
+        let shellName = this.shellName;
+        this.shellInit();
         
         // process callback
         this['callback'] = {
