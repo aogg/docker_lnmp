@@ -39,6 +39,9 @@ class pExec{
                 cwd: dockerConfig.execCwd,
                 env: dockerConfig.execEnv,
             }));
+
+            // virtualBox下的docker-compose必须是chcp 936
+
             // cp_execSync('start powershell \n');
             // cmd.stdin.write('start cmd \n');
         }
