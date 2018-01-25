@@ -56,29 +56,33 @@ class pExec{
         // process callback
         this['callback'] = {
             stdout : (msg) => {
+                let errMsg = '';
                 // console.log('stdout_data');
                 // console.log(['stdout_data', msg, this]);
                 this.setMsg(msg, 'out');
                 if (this.ifCommandEnd()) { // 已结束
-                    msg = this.msgCommandEnd('out');
+                    errMsg = this.getMsg('err');
+                    msg = this.msgCommandEnd('all'); // 同时清空
                     this.msgCommandEndFunc();
                 } else if (!this.getTailBool()) { // 需一次输出，等待满足上面条件
                     return;
                 }
 
-                this.getCallBack('stdout_data')(msg);
+                this.getCallBack('stdout_data')(msg, errMsg);
             },
             stderr: (msg) => {
                 // console.log('stderr_data');
                 this.setMsg(msg, 'err');
                 if (this.ifCommandEnd()) { // 已结束
-                    msg = this.msgCommandEnd('err');
-                    this.msgCommandEndFunc();
+                    // msg = this.msgCommandEnd('err');
+                    // this.msgCommandEndFunc();
                 } else if (!this.getTailBool()) { // 需一次输出，等待满足上面条件
                     return;
                 }
 
-                this.getCallBack('stderr_data')(msg);
+                // 结束符必定是成功的
+                // this.getCallBack('stderr_data')(msg);
+                // this.noSaveMsg && this.setMsg('', '', true);
             },
             close: (code) => { // 未验证
                 // console.log('on_close');

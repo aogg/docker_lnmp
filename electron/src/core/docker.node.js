@@ -3,6 +3,8 @@
 const configCommand = require('../config/config.command');
 const dockerConfig = require('../config/config.docker');
 const commonFunc = require('./commonFunc');
+const EventEmitter = require('events');
+const event = new EventEmitter();
 const Error = require('./error.js');
 const fs = require('fs'); // 调试写文件
 const os = require('os');
@@ -14,6 +16,7 @@ let cmd = Symbol('cmd'),
     clearRow = '[2K',
     endRow = '[1B',
     closing = '', // 结束时发送
+    dockerCmdStartBool = false, // 直接启用命令
     syncInit = Symbol('syncInit');
 
 
@@ -47,26 +50,37 @@ class NodeDocker {
         }
 
 
-        this.pe.setCallBack('stdout_data', (msg) => {
+        this.pe.setCallBack('stdout_data', (allMsg, errMsg) => {
             // console.log(this); // todo 会出现this一直是同样的值的问题
             // console.log('out_data');
 
-            // asyncFunc(msg);
-            this.execDockerAsync(0, msg, '');
+            // asyncFunc(allMsg);
+            this.execDockerAsync(0, allMsg, errMsg);
         });
-        this.pe.setCallBack('stderr_data', (msg) => { // docker命令会在stderr中输出
-            // fs.appendFile('F:/code/www/electron/a.txt', msg);
-            // console.log(msg.toString().includes('[2K'));
-            // console.log('err_data');
-
-            this.execDockerAsync(0, '', msg);
-        });
+        // this.pe.setCallBack('stderr_data', (msg) => { // docker命令会在stderr中输出
+        //     // fs.appendFile('F:/code/www/electron/a.txt', msg);
+        //     // console.log(msg.toString().includes('[2K'));
+        //     // console.log('err_data');
+        //     console.log([222, msg]);
+        //     this.execDockerAsync(0, '', msg);
+        // });
         this.pe.setCallBack('on_close', (code) => { // electron关闭后，貌似不会运行此
             // console.log('close');
 
             this.execDockerAsync(code, '', '');
         });
     }
+
+
+    execDockerSwitch(startSwitch){
+        dockerCmdStartBool = startSwitch;
+
+        if (startSwitch){ // 开始
+            // console.log(EventEmitter.listenerCount(event, 'execDockerSwitch'));
+            event.emit('execDockerSwitch');
+        }
+    }
+
 
 
     /**
@@ -78,6 +92,20 @@ class NodeDocker {
      * @returns {boolean}
      */
     execDocker(type, name, args) {
+        let switchBool = false;
+        if (type === 'async-switch'){
+            type = 'async';
+            this.pe.setProcessEnd(true);
+            switchBool = true;
+        }
+
+        if (!dockerCmdStartBool && !switchBool){ // 等待执行
+            event.addListener('execDockerSwitch', () => {
+                this.execDocker(type, name, args);
+            });
+            return false;
+        }
+
         this.currentExecArgs = args;
 
         if (type !== 'sync') { // 异步 async
@@ -93,41 +121,40 @@ class NodeDocker {
 
 
 
-    execDockerAsync(error, stdout, stderr){
-        let out = stdout ? stdout : stderr, // docker命令会在stderr中输出
-            msg = !error ? (Error.hasError() ? Error.getError() : out) : error; // todo 待处理标准输出和错误输出放一起
+    execDockerAsync(error, allMsg, errMsg){
 
         if (this){ // todo 出现this不存在的情况
             if(util.isFunction(this.getCommandData().filterMsg)){ // 过滤，要绑定当前this
                 // todo 暂无考虑process.exec的tailBool为true时
-                msg = Reflect.apply(this.getCommandData().filterMsg, this, [msg, this]);
+                allMsg = Reflect.apply(this.getCommandData().filterMsg, this, [allMsg, this]);
 
-                if (util.isNull(msg)) {return;} // 返回null，则不发送
+                if (util.isNull(allMsg)) {return;} // 返回null，则不发送
             }
 
-            this.execDockerAsyncSend(msg, error);
+            this.execDockerAsyncSend(error, allMsg, errMsg);
         }
 
 
-        config.dockerNodeCommandLog && msg && console.log('output : ' + os.EOL + msg); // 命令输出
+        config.dockerNodeCommandLog && allMsg && console.log('output : ' + os.EOL + allMsg); // 命令输出
     }
 
 
     /**
      * 发送命令的返回
      *
-     * @param msg
      * @param error
+     * @param allMsg
+     * @param errMsg
      */
-    execDockerAsyncSend(msg, error){
+    execDockerAsyncSend(error, allMsg, errMsg){
         if (this.event && this.currentExecArgs['callbackName']) {
             config.dockerNodeCommandLog && console.log(`event.sender.send : ${this.currentExecArgs['callbackName']}`);
             this.event.sender.send(
                 this.currentExecArgs['callbackName'],
-                sendCallBack(msg, this.currentExecArgs['name'], parseInt(error))
+                sendCallBack(allMsg, this.currentExecArgs['name'], parseInt(error), errMsg)
             ); // todo 待添加错误处理
         }else if(typeof this.localSend === 'function'){
-            this.localSend(msg, this.currentExecArgs['name'], parseInt(error));
+            this.localSend(allMsg, this.currentExecArgs['name'], parseInt(error), errMsg);
         }
     }
 
@@ -140,6 +167,7 @@ class NodeDocker {
      * @param asyncFunc 这个参数在异步中应该没有用，同步未知
      */
     cmdExec(command, asyncFunc){ // 木有cwd
+        // console.log('cmdExec');
         this.pe.shellExec(command || this.currentCommand, null, asyncFunc || function(){
             // 发送完毕执行，无参数
             // console.log('exec command end');

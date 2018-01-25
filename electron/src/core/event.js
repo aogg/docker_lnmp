@@ -88,6 +88,78 @@ eventConfig = { // todo 待，通过get()将处理逻辑放入对象内
                 return 'exit';
             }
         },
+        firstStart(){ // 首次运行
+            const NodeDocker = require('./docker.node.js');
+            const nodeStorage = require('./nodeStorage');
+            let containerConfigKey = 'containerConfig',
+                dockerNode = new NodeDocker(),
+                inspectFunc = function (){
+                    dockerNode.localSend = function (msg, name, error){
+                        const configCommand = require('../config/config.command');
+                        if (error || !msg){
+                            return;
+                        }
+
+                        let inspectData = {};
+                        try{
+                            msg = configCommand.getNotEnter(msg);
+                            inspectData = JSON.parse(msg);
+                        }catch (e){
+                            console.error('json解析错误' + msg);
+                        }
+
+                        if (Reflect.has(inspectData, 'Name')){
+                            nodeStorage.setItem(containerConfigKey + '.DOCKER_TLS_VERIFY', 1);
+                            nodeStorage.setItem(
+                                containerConfigKey + '.DOCKER_HOST',
+                                'tcp://' + inspectData['Driver']['IPAddress'] + ':2376' // 这里url是拼接的，正确应该是通过docker-machine url获取的
+                            );
+                            nodeStorage.setItem(
+                                containerConfigKey + '.DOCKER_CERT_PATH',
+                                inspectData['HostOptions']['AuthOptions']['StorePath']
+                            );
+                            nodeStorage.setItem(containerConfigKey + '.COMPOSE_CONVERT_WINDOWS_PATHS', true);
+
+                            nodeStorage.setItem('firstStartEvents', 2);
+                            dockerNode.execDockerSwitch(true);
+                        }
+                    };
+
+                    // todo 看下是否必传{}
+                    dockerNode.execDocker('async-switch', 'docker-machine/inspect-json', {});
+                };
+
+
+            let firstStartValue = nodeStorage.getItem('firstStartEvents'),
+                containerConfigBool = nodeStorage.getItem(containerConfigKey + '.DOCKER_TLS_VERIFY');
+
+            if (!firstStartValue && !containerConfigBool) {
+                // 检查vmOrVirtualBox
+                dockerNode.localSend = function (msg, name, error, errMsg){
+                    // console.log(msg);
+
+                    // 可以找到但是virtualbox环境
+                    if (msg.match('"provider=virtualbox"')){ // docker-machine管理，并已成功配置
+                        nodeStorage.setItem('firstStartEvents', 1);
+                        dockerNode.execDockerSwitch(true);
+                        return;
+                    }
+
+                    if (errMsg && msg.match('error during connect:')){ // 连接错误
+                        // docker-machine inspect
+                        inspectFunc();
+                    }
+
+                };
+
+                dockerNode.execDocker('async-switch', 'docker/info-labels', {});
+            }else if (firstStartValue === 2){ // docker-machine
+                // inspectFunc();
+                dockerNode.execDockerSwitch(true);
+            }else{
+                dockerNode.execDockerSwitch(true);
+            }
+        },
         createWindow,
         tray () {
             const { trayMenu } = require('./menu'); // 放在创建中
@@ -133,35 +205,6 @@ eventConfig = { // todo 待，通过get()将处理逻辑放入对象内
                 mainWindow.webContents.send(eventsName, msg);
             };
             eventsData.execDocker('async', 'docker-compose/ps-events', {'callbackName' : eventsName});
-        },
-        firstStart(){ // 首次运行
-            const nodeStorage = require('./nodeStorage');
-
-            if (!nodeStorage.getItem('firstStartEvents')) {
-                process.nextTick(function () {
-                    Promise
-                        .all([
-                            new Promise(function (resolve, reject) { // 检查vmOrVirtualBox
-                                const NodeDocker = require('./docker.node.js');
-                                let dockerNode = new NodeDocker();
-                                dockerNode.localSend = function (msg, name, error){
-                                    if (error){ // 非docker-machine管理
-                                        resolve({name: 'docker/v', data: 0});
-                                    }else{
-                                        resolve({name: 'docker/v', data: 1});
-                                    }
-                                };
-                                dockerNode.execDocker('async', 'docker/v', {});
-                            })
-                        ])
-                        .then(function () {
-                            // nodeStorage.setItem('firstStartEvents', 1);
-                        })
-                        .catch(function (){
-                            // 
-                        });
-                })
-            }
         },
     },
 

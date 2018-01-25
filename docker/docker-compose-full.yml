@@ -50,7 +50,7 @@ services:
         BASE_ZONE: "${compose_build_base_zone}"
     image: my-ubuntu:14.04
     container_name: "compose_base"
-    # network_mode: host
+#    network_mode: "host"
 
 
 

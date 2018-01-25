@@ -10,6 +10,8 @@ services:
     extends:
       file: "docker-compose-full.yml"
       service: "php"
+    # 在virtualBox时出现无法连接外网的情况
+    dns: '8.8.8.8'
     networks:
       all:
         aliases: 
@@ -20,6 +22,8 @@ services:
       - "${compose_volumes_nginx}"
     volumes_from: 
       - base
+    # 在virtualBox时出现无法连接外网的情况
+    dns: '8.8.8.8'
     extends:
       file: "docker-compose-full.yml"
       service: "nginx"
@@ -32,4 +36,4 @@ services:
       service: "base"
 
 networks:
-  all:
+  all: {}

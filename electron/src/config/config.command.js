@@ -91,6 +91,10 @@ let commandConfig = {
         lineArr(str){
             return str.replace("\r\n\r\n", "").split(/\r?\n/) || [];
         },
+
+        getNotEnter(str){
+            return str.trim()
+        }
     },
 
     replaceEnter(str, replace, num = null){

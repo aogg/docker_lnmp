@@ -125,7 +125,7 @@ let dockerConfig = {
 
 
             // 其他
-            host_volumes_www:'f:/code/www/', // 宿主机与容器的共享目录
+            // host_volumes_www:'E:/code/www/', // 宿主机与容器的共享目录
             get compose_volumes_base(){ // 必须要匿名函数才能用this
                 return `${e.host_volumes_www}:/www/`;
             },
@@ -136,9 +136,12 @@ let dockerConfig = {
 
 
             // todo docker-machine，待处理为自动识别
-            // DOCKER_TLS_VERIFY: 1,
+            host_volumes_www:'/www/', // 宿主机与容器的共享目录
+            // DOCKER_TLS_VERIFY: "1",
             // DOCKER_HOST: "tcp://192.168.99.100:2376",
-            // DOCKER_CERT_PATH: "D:/PHP/box_list/Docker Toolbox/machines/default",
+            // DOCKER_CERT_PATH: "C:/Users/code/.docker/machine/machines/default",
+            // COMPOSE_CONVERT_WINDOWS_PATHS: 'true', // 会导致在window中执行会将composer.yml的volumes里本地路径改为\，这样就无法启动了
+            DOCKER_MACHINE_NAME: 'default',
         };
 
         return symbolTemp[key]['data'] = commonFunc.objectMergeRecursive(e, nodeStorage.getItem(key));
