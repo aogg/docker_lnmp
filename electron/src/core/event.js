@@ -154,8 +154,9 @@ eventConfig = { // todo 待，通过get()将处理逻辑放入对象内
 
                 dockerNode.execDocker('async-switch', 'docker/info-labels', {});
             }else if (firstStartValue === 2){ // docker-machine
-                // inspectFunc();
-                dockerNode.execDockerSwitch(true);
+                // 随时可能改变ip
+                inspectFunc();
+                // dockerNode.execDockerSwitch(true);
             }else{
                 dockerNode.execDockerSwitch(true);
             }
