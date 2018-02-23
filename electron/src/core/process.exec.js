@@ -41,7 +41,9 @@ class pExec{
             }));
 
             // virtualBox下的docker-compose必须是chcp 936
-
+            // cp_exec('docker-machine ls \n', function (){
+            //     console.log(arguments);
+            // });
             // cp_execSync('start powershell \n');
             // cmd.stdin.write('start cmd \n');
         }

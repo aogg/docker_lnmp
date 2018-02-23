@@ -51,7 +51,7 @@ let dockerConfig = {
             Object.assign(temp, typeof this.env[k] !== 'object'?{[k]: this.env[k]}:this.env[k]);
         }
 
-        return Object.assign(temp, this.env)
+        return Object.assign(temp, process.env);
     },
     get configEnv(){ // 不获取process.env
         // 如出现getter的问题，可通过JSON.stringify

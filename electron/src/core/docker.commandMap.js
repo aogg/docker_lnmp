@@ -186,6 +186,7 @@ let commandMap =  {
         [commandMapBefore]: docker_machine + ' ',
         'version': '-v',
         'inspect-json': 'inspect -f "{{json .}}"',
+        'ls': 'ls',
     },
 
 
