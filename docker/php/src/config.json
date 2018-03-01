@@ -27,8 +27,22 @@
 	},
 	{
 		"EXT_INSTALL" : 0,
+		"EXT_NAME"    : "memcached-3.0.4",
+		"EXT_URL"     : "http://pecl.php.net/get/memcached-3.0.4.tgz",
+		"EXT_DEPEND"  : "libevent-dev libmemcached-dev",
+		"EXT_ARG"     : "--disable-memcached-sasl"
+	},
+	{
+		"EXT_INSTALL" : 0,
 		"EXT_NAME"    : "xdebug-2.4.0",
 		"EXT_URL"     : "http://pecl.php.net/get/xdebug-2.4.0.tgz",
+		"EXT_DEPEND"  : "",
+		"EXT_ARG"     : ""
+	},
+	{
+		"EXT_INSTALL" : 0,
+		"EXT_NAME"    : "xdebug-2.6.0",
+		"EXT_URL"     : "http://pecl.php.net/get/xdebug-2.6.0.tgz",
 		"EXT_DEPEND"  : "",
 		"EXT_ARG"     : ""
 	},
@@ -48,8 +62,22 @@
 	},
 	{
 		"EXT_INSTALL" : 0,
+		"EXT_NAME"    : "mongodb-1.4.1",
+		"EXT_URL"     : "http://pecl.php.net/get/mongodb-1.4.1.tgz",
+		"EXT_DEPEND"  : "",
+		"EXT_ARG"     : ""
+	},
+	{
+		"EXT_INSTALL" : 0,
 		"EXT_NAME"    : "redis-2.2.8",
 		"EXT_URL"     : "http://pecl.php.net/get/redis-2.2.8.tgz",
+		"EXT_DEPEND"  : "",
+		"EXT_ARG"     : ""
+	},
+	{
+		"EXT_INSTALL" : 0,
+		"EXT_NAME"    : "redis-3.1.6",
+		"EXT_URL"     : "http://pecl.php.net/get/redis-3.1.6.tgz",
 		"EXT_DEPEND"  : "",
 		"EXT_ARG"     : ""
 	},
@@ -72,6 +100,15 @@
 		"EXT_INSTALL" : 0,
 		"EXT_NAME"    : "swoole-2.0.9",
 		"EXT_URL"     : "https://codeload.github.com/swoole/swoole-src/tar.gz/v2.0.9",
+		"EXT_ARG"     : "--enable-coroutine --enable-openssl --enable-async-redis",
+		"EXT_SORT"    : ["openssl"],
+		"EXT_DEPEND"  : "libhiredis-dev libz-dev",
+		"EXT_EVAL"    : ""
+	},
+	{
+		"EXT_INSTALL" : 0,
+		"EXT_NAME"    : "swoole-1.10.1",
+		"EXT_URL"     : "https://codeload.github.com/swoole/swoole-src/tar.gz/v1.10.1",
 		"EXT_ARG"     : "--enable-coroutine --enable-openssl --enable-async-redis",
 		"EXT_SORT"    : ["openssl"],
 		"EXT_DEPEND"  : "libhiredis-dev libz-dev",
@@ -119,6 +156,14 @@
 	},
 	{
 		"EXT_INSTALL" : 0,
+		"EXT_NAME"    : "amqp-1.9.3",
+		"EXT_URL"     : "http://pecl.php.net/get/amqp-1.9.3.tgz",
+		"EXT_DEPEND"  : "librabbitmq-dev",
+		"EXT_ARG"     : "",
+		"EXT_DESC"    : ""
+	},
+	{
+		"EXT_INSTALL" : 0,
 		"EXT_NAME"    : "http-3.1.0",
 		"EXT_URL"     : "http://pecl.php.net/get/pecl_http-3.1.0.tgz",
 		"EXT_DEPEND"  : "",
@@ -149,14 +194,13 @@
 		"EXT_ARG"     : "",
 		"EXT_DESC"    : "php-4.0以上，6.0一下"
 	},
-	// {
-	// 	"EXT_INSTALL" : 0,
-	// 	"EXT_NAME"    : "svn-1.0.3",
-	// 	"EXT_URL"     : "http://pecl.php.net/get/svn-1.0.3.tgz",
-	// 	"EXT_DEPEND"  : "",
-	// 	// "EXT_DESC"    : "",
-	// 	"EXT_ARG"     : ""
-	// },
+	{
+		"EXT_INSTALL" : 0,
+		"EXT_NAME"    : "svn-1.0.3",
+		"EXT_URL"     : "http://pecl.php.net/get/svn-1.0.3.tgz",
+		"EXT_DEPEND"  : "libsvn-dev",
+		"EXT_ARG"     : ""
+	},
 	{
 		"EXT_INSTALL" : 0,
 		"EXT_NAME"    : "swoole-1.8.6-stable",
