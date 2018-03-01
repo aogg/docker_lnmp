@@ -4,6 +4,9 @@ const nodeStorage = require('../core/nodeStorage');
 const emptySymbol = Symbol();
 
 let currentOs = os.type(),
+    isWin = /windows/i.test(currentOs),
+    isMac = /Darwin/i.test(currentOs),
+    isLinux = /Linux/i.test(currentOs),
     currentShellName = '',
     proxyConfig = {};
 
@@ -17,6 +20,10 @@ function processExec() {
 
 let commandConfig = {
     windows:{
+        whereCmd(command){
+            return `where ${command}`;
+        },
+
         execShellNameSync(command){ // 同步执行前缀
             if (this.shellName === 'powershell') {
                 return `powershell -Command "${command.replace(/([^`])"/g, "$1\"\"\"\"")}"`;
@@ -119,6 +126,14 @@ let commandConfig = {
         }
     },
     linux:{
+        whereCmd(command){
+            return `which ${command}`;
+        },
+    },
+    mac:{
+        whereCmd(command){
+            return `which ${command}`;
+        },
     },
 
     /**
@@ -141,7 +156,7 @@ let commandConfig = {
                 str = proxyConfig.lineArr(str).shift();
                 if (checkPowerShell && (check = proxyConfig.checkPowerShell) && check()) { // 是powershell，需&"C:\Program Files\Docker\Docker\Resources\bin\docker-compose.exe"
                     str = '&"' + str + '"';
-                }else{
+                }else{ // mac和linux也可以用引号包裹路径
                     str = '"' + str + '"';
                 }
             }
@@ -156,9 +171,9 @@ let commandConfig = {
 
         if (async) { // 异步
             setTimeout(function () {
-                processExec().exec(`where ${command}`, {encoding : 'utf8'}, function (error, stdout, stderr) {
+                processExec().exec(proxyConfig.whereCmd(command), {encoding : 'utf8'}, function (error, stdout, stderr) {
                     if (error){
-                        console.error(`where ${command} error: ${stderr}`);
+                        console.error(`whereCmd ${command} error: ${stderr}`);
                         return;
                     }
 
@@ -169,7 +184,7 @@ let commandConfig = {
             return async === true ? command : async;
         }
 
-        return disFunc(processExec().execSync(`where ${command}`, {encoding : 'utf8'}));
+        return disFunc(processExec().execSync(proxyConfig.whereCmd(command), {encoding : 'utf8'}));
     },
 };
 
@@ -178,10 +193,12 @@ let commandConfig = {
 proxyConfig = new Proxy(commandConfig, {
     get:(target, key) => {
         if (!Reflect.has(target, key)){ // 顶层不存在即读取系统配置层
-            if (/windows/i.test(currentOs)) { // todo 可能要改为win
+            if (isWin) { // todo 可能要改为win
                 target = target['windows'];
-            }else if(/Linux/i.test(currentOs)){
+            } else if(isLinux){
                 target = target['linux'];
+            } else if (isMac){
+                target = target['mac'];
             }
         }
 
