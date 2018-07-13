@@ -8,24 +8,8 @@ FROM my-ubuntu:14.04
 
 MAINTAINER aogg
 
-
-# 可被删除的依赖
-RUN buildDeps=" \
-		libxml2-dev \
-		xz-utils \
-	" \
-	&& apt update && apt install -y \
-		# persistent / runtime deps
-		ca-certificates librecode0 libsqlite3-0 jq \
-		# phpize deps
-		autoconf file libc-dev pkg-config re2c \
-		$buildDeps \
-		--no-install-recommends \
-
-	&& rm -r /var/lib/apt/lists/*
-
-
 # 可自定义的配置
+ARG PHP_APT_INSTALL='libxml2-dev xz-utils'
 # 安装文件目录
 ARG PHP_CONFIGURE_DIR='/usr/local/php'
 ARG PHP_DIR='/usr/src/php'
@@ -35,7 +19,16 @@ ARG PHP_SHA256='e1bbe33d6b4da66b15c483131520a9fc505eeb6629fa70c5cfba79590a1d0801
 ARG PHP_GPG_KEYS='0B96609E270F565C13292B24C13C70B87267B52D 0BD78B5F97500D450838F95DFE857D9A90D90EC1 F38252826ACD957EF380D39F2F7956BC5DA04B5D'
 ARG PHP_PROCESSES_NUM=15
 
+# 可被删除的依赖
+RUN apt update && apt install -y \
+		# persistent / runtime deps
+		ca-certificates librecode0 libsqlite3-0 jq \
+		# phpize deps
+		autoconf file libc-dev pkg-config re2c \
+		${PHP_APT_INSTALL} \
+		--no-install-recommends \
 
+	&& rm -r /var/lib/apt/lists/* \
 
 
 # 创建目录
@@ -43,7 +36,7 @@ ARG PHP_PROCESSES_NUM=15
 # http://php.net/get/php-5.5.36.tar.gz/from/a/mirror
 # http://cn2.php.net/get/php-5.5.36.tar.gz/from/this/mirror
 # http://cn2.php.net/get/php-5.5.36.tar.gz.asc/from/this/mirror
-RUN PHP_FILENAME="php-${PHP_VERSION}.tar.xz" \ 
+   	&& PHP_FILENAME="php-${PHP_VERSION}.tar.xz" \ 
 	&& PHP_INI_DIR="${PHP_DIR}/conf" \
 
 
@@ -88,7 +81,8 @@ RUN PHP_FILENAME="php-${PHP_VERSION}.tar.xz" \
 
 # 添加环境变量
 ENV PATH $PHP_DIR/bin:$PHP_DIR/sbin:$PATH
-
+# PHPStorm环境的console的xdebug调试配置
+ENV PHP_IDE_CONFIG="serverName=PHPStorm"
 
 # 安装php扩展
 COPY ./src/* ${PHP_CONFIGURE_DIR}/../php-ext/

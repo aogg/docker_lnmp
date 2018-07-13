@@ -13,6 +13,7 @@ services:
         PHP_GPG_KEYS: "${compose_build_php_gpg_keys}"
         PHP_CONFIGURE_ARGS: "${compose_build_php_configure_args}"
         PHP_PROCESSES_NUM: "${compose_build_php_processes_num}" # 并发安装扩展的数量
+        PHP_APT_INSTALL: "${compose_build_php_apt_install}" # 并发安装扩展的数量
     image: "my-php:${compose_build_php_version}"
     container_name: "compose-php-${compose_build_php_version}"
     ports:
