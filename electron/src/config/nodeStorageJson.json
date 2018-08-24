@@ -1,0 +1,14 @@
+{
+	"config-exe": {
+		"docker": "\"/usr/local/bin/docker\"",
+		"docker-machine": "\"/usr/local/bin/docker-machine\"",
+		"docker-compose": "\"/usr/local/bin/docker-compose\""
+	},
+	"containerConfig": {
+		"DOCKER_TLS_VERIFY": 1,
+		"DOCKER_HOST": "tcp://192.168.99.100:2376",
+		"DOCKER_CERT_PATH": "/Users/code/.docker/machine/machines/default",
+		"COMPOSE_CONVERT_WINDOWS_PATHS": true
+	},
+	"firstStartEvents": 2
+}

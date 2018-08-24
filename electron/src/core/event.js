@@ -98,6 +98,13 @@ eventConfig = { // todo 待，通过get()将处理逻辑放入对象内
                 }
             }
         },
+        mac(){ // mac处理
+            if (process.platform !== 'darwin'){
+                return;
+            }
+
+            app.setAboutPanelOptions(config.electronMacAboutPanel);
+        },
         firstStart(){ // 首次运行
             const NodeDocker = require('./docker.node.js');
             const nodeStorage = require('./nodeStorage');
@@ -192,8 +199,9 @@ eventConfig = { // todo 待，通过get()将处理逻辑放入对象内
             });
         },
         defaultMenu(){ // 界面快捷键
-            const {defaultMenu} = require('./menu');
-            const menu = Menu.buildFromTemplate(defaultMenu);
+            let {defaultMenu} = require('./menu');
+            let menu = Menu.buildFromTemplate(defaultMenu);
+
             Menu.setApplicationMenu(menu);
         },
         'docker-events': function () { // docker-compose events --json

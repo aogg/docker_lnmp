@@ -39,6 +39,13 @@ let config = {
         // titleBarStyle: 'hidden', // mac替代方案
         show: true, // 是否显示
     },
+    electronMacAboutPanel: { // 设置 "关于" 面板选项。
+        applicationName: 'docker_lnmp',
+        applicationVersion: '1.0.0',
+        copyright: null,
+        credits: null,
+        version: null,
+    },
     get nodeStoragePath(){
         return Path.join(this.srcPath, './config/nodeStorageJson.json');
     },

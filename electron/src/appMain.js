@@ -24,7 +24,7 @@ let router = new VueRouter({
     routes: [
         {path: '/index', components: { app: indexComponent }},
         {path: '/setup', components: { app: setupComponent }},
-        {path: '*', components: { app: indexComponent }},
+        {path: '*', components: {app: location.hash.startsWith('#/setup') ? setupComponent : indexComponent}},
     ]
 });
 
