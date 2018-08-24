@@ -8,12 +8,13 @@ function dockerExec(command, arg = null){
     nd.execDocker('async', command, arg);
 }
 
-
-module.exports = {
+let menuConfig = {};
+menuConfig = {
+    appMenuName: '操作',
     get defaultMenu(){
         let template = [
             {
-                label: '操作',
+                label: menuConfig.appMenuName,
                 submenu: [
                     {
                         label: 'Toggle Developer Tools',
@@ -161,7 +162,17 @@ module.exports = {
             }
         },
     ],
+    get dockMenu(){
+        return [
+            {
+                label: menuConfig.appMenuName,
+                submenu: menuConfig.trayMenu,
+            },
+        ];
+    },
 };
+
+module.exports = menuConfig;
 
 
 

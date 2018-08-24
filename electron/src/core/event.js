@@ -1,4 +1,4 @@
-const {Tray, Menu, BrowserWindow, app} = require('electron');
+const {Tray, Menu, BrowserWindow, nativeImage, app} = require('electron');
 const dotEnv = require('dotenv');
 const fs = require('fs');
 
@@ -36,7 +36,6 @@ function createWindow(){
     });
 
     mainWindow.on('page-title-updated', function () {
-        // todo 未知，在webpack-dev-server时会出现arguments[1]不改变情况
         appIcon.setToolTip(config.title);
         appIcon.setTitle(config.title);
     })
@@ -104,6 +103,7 @@ eventConfig = { // todo 待，通过get()将处理逻辑放入对象内
             }
 
             app.setAboutPanelOptions(config.electronMacAboutPanel);
+            // app.dock.setBadge(config.title)
         },
         firstStart(){ // 首次运行
             const NodeDocker = require('./docker.node.js');
@@ -179,17 +179,14 @@ eventConfig = { // todo 待，通过get()将处理逻辑放入对象内
             }
         },
         createWindow,
-        tray () {
-            const { trayMenu } = require('./menu'); // 放在创建中
-            const iconName = process.platform === 'win32' ? 'windows-icon.png' : 'iconTemplate.png';
-            const iconPath = `${config.srcPath}/images/${iconName}`;
-            appIcon = new Tray(iconPath);
-            // 在上面的on中
-            // appIcon.setToolTip(config.title);
-            // appIcon.setTitle(config.title);
+        menu () {
+            const { defaultMenu, trayMenu, dockMenu } = require('./menu'); // 放在创建中
+            let iconName = process.platform === 'win32' ? 'windows-icon.png' : 'iconTemplate.png';
+            let iconNative = nativeImage.createFromPath(`${config.srcPath}/images/${iconName}`);
+            // icon菜单
+            appIcon = new Tray(iconNative);
 
-            const contextMenu = Menu.buildFromTemplate(trayMenu);
-            appIcon.setContextMenu(contextMenu);
+            appIcon.setContextMenu(Menu.buildFromTemplate(trayMenu));
             appIcon.on('double-click', function (event , bounds) { // 双击
                 if (event.altKey){ // 重启
 
@@ -197,12 +194,18 @@ eventConfig = { // todo 待，通过get()将处理逻辑放入对象内
                     mainWindow.show();
                 }
             });
-        },
-        defaultMenu(){ // 界面快捷键
-            let {defaultMenu} = require('./menu');
-            let menu = Menu.buildFromTemplate(defaultMenu);
+            // 在上面（createWindow）的on中
+            // appIcon.setToolTip(config.title);
+            // appIcon.setTitle(config.title);
 
-            Menu.setApplicationMenu(menu);
+
+            // 系统菜单
+            Menu.setApplicationMenu(Menu.buildFromTemplate(defaultMenu));
+
+
+            if (process.platform === 'darwin'){ // mac的dock右键菜单
+                app.dock.setMenu(Menu.buildFromTemplate(dockMenu));
+            }
         },
         'docker-events': function () { // docker-compose events --json
             const NodeDocker = require('./docker.node');
