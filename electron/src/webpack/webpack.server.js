@@ -5,16 +5,16 @@ const webpackDevServer = require('webpack-dev-server');
 let webpackDevServerConfig = config.webpackDevServer;
 
 
-webpackConfig.entry.appMain.push('webpack/hot/dev-server', `webpack-dev-server/client?${webpackDevServerConfig.url}`);
-webpackConfig.plugins.unshift(new webpack.HotModuleReplacementPlugin());
+webpackConfig.plugins.unshift(new webpack.HotModuleReplacementPlugin()); // 加入热替换
 webpackConfig.output.publicPath = webpackDevServerConfig.publicPath;
 
 new webpackDevServer(webpack(webpackConfig), {
-    publicPath: webpackDevServerConfig.publicPath,
+    publicPath: webpackDevServerConfig.publicPath, // 和webpackConfig.output.publicPath一样
     hot: true,
     inline: true,
+    // quiet: true, // lets WebpackDashboard do its thing 静默状态
     stats: {colors: true},
-}).listen(webpackDevServerConfig.port, function (error, result) {
+}).listen(webpackDevServerConfig.port, '127.0.0.1', function (error, result) {
     if (error) {
         console.error(error);
     }

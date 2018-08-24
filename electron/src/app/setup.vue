@@ -11,8 +11,8 @@
 </style>
 <script>
 
-    const setupLeft = require('./public/setup/setup-left.vue');
-    const setupContent = require('./public/setup/setup-content.vue');
+    import setupLeft from './public/setup/setup-left.vue';
+    import setupContent from './public/setup/setup-content.vue';
 
     export default{
         beforeCreate(){

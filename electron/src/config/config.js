@@ -36,6 +36,7 @@ let config = {
         // 是否显示菜单栏，无边框
         // transparent: true, // 透明
         frame: false,
+        // titleBarStyle: 'hidden', // mac替代方案
         show: true, // 是否显示
     },
     get nodeStoragePath(){
@@ -50,11 +51,17 @@ let config = {
     get indexHtmlName(){
         return 'index' + this.indexHtmlSuf;
     },
+    get macTerminalExecPath(){ // mac打开命令行窗口执行命令的工具
+        return this.srcPath + '/resources/terminal';
+    },
     get srcPath(){
         return this.rootPath + '/src';
     },
     get tempPath(){
         return this.srcPath + '/temp';
+    },
+    get dockerPath(){
+        return Path.join(this.rootPath, '../docker')
     },
     get indexHtmlPath(){ // 编译后index.html放在哪
         return Path.join(this.tempPath, this.indexHtmlName);
@@ -73,7 +80,7 @@ let config = {
      * @returns {string}
      */
     mainLoadUrl(fileBool = true){
-        let url, indexHtmlPath;
+        let url;
         if (this.appDev) {
             url = this.webpackDevServer.url + this.webpackDevServer.publicPath + this.indexHtmlName;
         } else {
@@ -88,7 +95,7 @@ let config = {
     webpackDevServer:{
         publicPath: '/', // 在url的根目录
         port: 7777,
-        host:'localhost',
+        host:'127.0.0.1',
         get url(){
             return 'http://' + this.host + ':' + this.port + '/';
         }

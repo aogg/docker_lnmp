@@ -66,7 +66,9 @@ let commandMap =  {
                 let str = '';
                 if (command.args.length){
                     command.args.map(function (val){
-                        str += ` -f id=${val} `;
+                        if (val) {
+                            str += ` -f id=${val} `;
+                        }
                     });
                 }
 

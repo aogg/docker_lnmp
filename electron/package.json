@@ -16,8 +16,8 @@
     "start": "electron .",
     "debug": "electron . --debug -无效",
     "server": "node ./src/webpack/webpack.server.js",
-    "build": "webpack --config ./src/webpack/webpack.config.js --display-error-details",
-    "watch": "webpack --config ./src/webpack/webpack.config.js --display-error-details -w",
+    "build": "webpack --config ./src/webpack/webpack.config.js",
+    "watch": "webpack --config ./src/webpack/webpack.config.js -w",
     "build-ddl": "webpack --progress --colors --config ./src/webpack/ddl.config.js",
     "pack:help": "build --help",
     "pack": "build --dir",
@@ -28,8 +28,7 @@
     "appId": "com.electron.aogg.docker_lnmp",
     "asar": [
       "./src/*",
-      "asar相关无效",
-      "electron升级到v1.6后，改为false又会报错"
+      "asar相关无效"
     ],
     "asarUnpack": [
       "!./src/*"
@@ -41,19 +40,17 @@
       "!.vscode/*",
       "!node_modules/*"
     ],
-    "extraResources":[
+    "extraResources": [
       {
-        "from":"../docker",
-        "to":"docker"
+        "from": "../docker",
+        "to": "docker"
       }
     ],
     "win": {
       "icon": "",
-      "target":"7z"
+      "target": "7z"
     },
-    "nsis": {
-
-    },
+    "nsis": {},
     "mac": {
       "category": "public.app.category.utilities",
       "icon": ""
@@ -62,33 +59,33 @@
       "icon": ""
     }
   },
-  "dependencies": {},
   "devDependencies": {
-    "babel-cli": "^6.14.0",
-    "babel-core": "^6.14.0",
-    "babel-loader": "^6.2.5",
-    "babel-plugin-transform-runtime": "^6.15.0",
-    "babel-preset-es2015": "^6.14.0",
-    "babel-preset-stage-0": "^6.5.0",
-    "babel-runtime": "^6.11.6",
-    "colors": "^1.1.2",
-    "css-loader": "^0.25.0",
-    "electron": "^1.4.15",
-    "electron-builder": "^11.7.0",
-    "electron-packager": "^8.5.2",
-    "html-webpack-plugin": "^2.22.0",
-    "node-inspector": "^0.12.8",
-    "node-pre-gyp": "^0.6.30",
-    "style-loader": "^0.13.1",
-    "vue": "^2.1.8",
-    "vue-hot-reload-api": "^2.0.6",
-    "vue-html-loader": "^1.2.3",
-    "vue-loader": "^10.0.2",
-    "vue-router": "^2.1.1",
-    "vue-style-loader": "^1.0.0",
-    "vue-template-compiler": "^2.1.8",
-    "vuex": "^2.1.1",
-    "webpack": "^1.13.2",
-    "webpack-dev-server": "^1.16.1"
-  }
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-stage-0": "^6.24.1",
+    "colors": "^1.3.1",
+    "css-loader": "^1.0.0",
+    "electron": "^2.0.8",
+    "electron-builder": "^20.28.1",
+    "electron-packager": "^12.1.0",
+    "html-webpack-plugin": "^3.2.0",
+    "mini-css-extract-plugin": "^0.4.2",
+    "style-loader": "^0.22.1",
+    "vue": "^2.5.17",
+    "vue-devtools": "^4.1.4",
+    "vue-hot-reload-api": "^2.3.0",
+    "vue-html-loader": "^1.2.4",
+    "vue-loader": "^15.4.0",
+    "vue-router": "^3.0.1",
+    "vue-style-loader": "^4.1.2",
+    "vue-template-compiler": "^2.5.17",
+    "vuex": "^3.0.1",
+    "webpack": "^4.16.5",
+    "webpack-command": "^0.4.1",
+    "webpack-dev-server": "^3.1.5"
+  },
+  "__npminstall_done": false
 }

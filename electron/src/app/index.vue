@@ -21,8 +21,8 @@
 
 <script>
 //    import OtherComponent from './public/footer.vue'
-    const containerModules = require('./public/container/compose.vue');
-    const containerHeaderModules = require('./public/container/header.vue');
+    import containerModules from './public/container/compose.vue';
+    import containerHeaderModules from './public/container/header.vue';
     const electron = require('electron');
     let browserWindowProxy = null,
         mainLoadUrl = electron.remote.getGlobal('config').mainLoadUrl();

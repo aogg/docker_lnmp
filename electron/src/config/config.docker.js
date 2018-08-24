@@ -6,7 +6,7 @@ const configCommand = require('../config/config.command');
 let symbolTemp = {};
 // const configCommand = require('./config.command');
 
-let dockerRoot = Path.join(config.rootPath, '../docker'); // todo 待改成自动获取
+let dockerRoot = config.dockerPath;
 
 
 let dockerConfig = {
@@ -64,19 +64,21 @@ let dockerConfig = {
             return symbolTemp[key]['data'];
         }
         symbolTemp[key]['symbol'] = nodeStorage.getUpdate(key);
+        let envP = process.env;
 
 
         let e = {
             // php的--build-arg
             php:{
-                compose_build_php_version:'5.6.24', // php版本号
-                compose_build_php_configure_dir:'/usr/local/php', // php编译目录
-                compose_build_php_dir:'/usr/src/php', // php安装目录
+                compose_build_php_version: envP.compose_build_php_version, // php版本号
+                compose_build_php_configure_dir: envP.compose_build_php_configure_dir, // php编译目录
+                compose_build_php_dir: envP.compose_build_php_dir, // php安装目录
                 // php验证用
-                compose_build_php_sha256:'e1bbe33d6b4da66b15c483131520a9fc505eeb6629fa70c5cfba79590a1d0801',
-                compose_build_php_gpg_keys:'0B96609E270F565C13292B24C13C70B87267B52D 0BD78B5F97500D450838F95DFE857D9A90D90EC1 F38252826ACD957EF380D39F2F7956BC5DA04B5D',
-                compose_build_php_configure_args:'--enable-fpm', // php的编译参数
-                compose_build_php_processes_num:15, // 并发安装扩展的数量
+                compose_build_php_sha256: envP.compose_build_php_sha256,
+                compose_build_php_gpg_keys: envP.compose_build_php_gpg_keys,
+                compose_build_php_configure_args: envP.compose_build_php_configure_args, // php的编译参数
+                compose_build_php_processes_num: envP.compose_build_php_processes_num, // 并发安装扩展的数量
+                compose_build_php_apt_install: envP.compose_build_php_apt_install, // php的apt install
                 // php的共享目录
                 get compose_volumes_php_conf(){
                     return `${e.compose_dir}/php/conf/conf:/usr/src/php/conf/`;
@@ -89,25 +91,9 @@ let dockerConfig = {
 
             // nginx的--build-arg
             nginx: {
-                compose_build_nginx_version:'1.10.1',
-                compose_build_nginx_dir:'/usr/src/nginx',
-                compose_build_nginx_args:`
-                    --with-http_addition_module
-                    --with-http_auth_request_module
-                    --with-http_dav_module
-                    --with-http_geoip_module
-                    --with-http_gzip_static_module
-                    --with-http_image_filter_module
-                    --with-http_perl_module
-                    --with-http_realip_module
-                    --with-http_ssl_module
-                    --with-http_stub_status_module
-                    --with-http_sub_module
-                    --with-http_xslt_module
-                    --with-ipv6
-                    --with-mail
-                    --with-mail_ssl_module
-                `,
+                compose_build_nginx_version: envP.compose_build_nginx_version,
+                compose_build_nginx_dir: envP.compose_build_nginx_dir,
+                compose_build_nginx_args: envP.compose_build_nginx_args,
                 
                 get compose_volumes_nginx(){ // nginx conf的共享目录
                     return `${e.compose_dir}/nginx/conf/:/usr/src/nginx/conf/`;
@@ -116,7 +102,7 @@ let dockerConfig = {
 
             // bash的--build-arg
             base:{
-                compose_build_base_zone:'PRC',
+                compose_build_base_zone: envP.compose_build_base_zone,
             },
 
 

@@ -15,8 +15,8 @@
 </style>
 <script>
 
-    const actionSelf = require('./actionSelf.vue');
-    const actionOther = require('./actionOther.vue');
+    import actionSelf from './actionSelf.vue';
+    import actionOther from './actionOther.vue';
 
     export default {
         data(){

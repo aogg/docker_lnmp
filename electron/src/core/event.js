@@ -1,4 +1,6 @@
 const {Tray, Menu, BrowserWindow, app} = require('electron');
+const dotEnv = require('dotenv');
+const fs = require('fs');
 
 let appIcon,
     eventConfig,
@@ -88,6 +90,14 @@ eventConfig = { // todo 待，通过get()将处理逻辑放入对象内
                 return 'exit';
             }
         },
+        loadEnv(){ // 加载env
+            let envConfig = dotEnv.parse(fs.readFileSync(config.dockerPath + '/.env'));
+            for (let k in envConfig) {
+                if (!Reflect.has(process.env, k)) {
+                    process.env[k] = envConfig[k]
+                }
+            }
+        },
         firstStart(){ // 首次运行
             const NodeDocker = require('./docker.node.js');
             const nodeStorage = require('./nodeStorage');
@@ -136,16 +146,16 @@ eventConfig = { // todo 待，通过get()将处理逻辑放入对象内
             if (!firstStartValue && !containerConfigBool) {
                 // 检查vmOrVirtualBox
                 dockerNode.localSend = function (msg, name, error, errMsg){
-                    // console.log(msg);
 
                     // 可以找到但是virtualbox环境
                     if (msg.match('"provider=virtualbox"')){ // docker-machine管理，并已成功配置
                         nodeStorage.setItem('firstStartEvents', 1);
                         dockerNode.execDockerSwitch(true);
                         return;
-                    }
-
-                    if (errMsg && msg.match('error during connect:')){ // 连接错误
+                    }else if (
+                        msg.match('error during connect:') || 
+                        msg.match('Is the docker daemon running?')
+                    ){ // 连接错误
                         // docker-machine inspect
                         inspectFunc();
                     }

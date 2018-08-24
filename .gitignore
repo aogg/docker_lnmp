@@ -10,4 +10,4 @@ electron/npm-debug.log
 electron/npm-debug.log.*
 docker/nginx/conf/vhost/*
 docker/nginx/conf/vhost/www.baidu.dev.conf
-/electron/src/config/nodeStorageJson.json
+electron/src/config/nodeStorageJson.json

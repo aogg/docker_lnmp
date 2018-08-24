@@ -1,27 +1,32 @@
 'use strict';
 
-require('./app/public/css/common.css'); // 加载公共css
+// 加载公共css，必须import否则会被放到最后
+import './app/public/css/common.css';
 const Vue = require('vue');
-const Vux = require('vuex');
+const VueX = require('vuex');
 const electron = window.require('electron');
 const VueRouter = require('vue-router');
 // var config = require('./config/config.js'); // 不能require config
+// 必须要有.开头
+import indexComponent from './app/index.vue';
+import setupComponent from './app/setup.vue';
+import windowHeader from './app/public/header.vue';
 
 let {dockerParam, ipcRenderName} = require('./core/docker'),
     dataCallback = {}, // 存放sendDocker的func
     uniqidCallback = {}, // 同上，待转移
-    uniqid = 1,
-    App = require(location.hash.startsWith('#/setup')?'./app/setup.vue':'./app/index.vue'); // 必须要有.开头
+    uniqid = 1;
 
-// vueRouter报错，只好自己来
-// Vue.use(VueRouter);
-//
-// let routes = new VueRouter({
-//     routes: [
-//         {path: '*', name: 'all', component: { template: '<div>home</div>' }},
-//         {path: '/', name: 'index', component: { template: '<div>home</div>' }}
-//     ]
-// });
+
+// vue-router
+Vue.use(VueRouter);
+let router = new VueRouter({
+    routes: [
+        {path: '/index', components: { app: indexComponent }},
+        {path: '/setup', components: { app: setupComponent }},
+        {path: '*', components: { app: indexComponent }},
+    ]
+});
 
 /*<keep-alive>
 <router-view></router-view>
@@ -29,12 +34,10 @@ let {dockerParam, ipcRenderName} = require('./core/docker'),
 
 window.appStartTime = electron.remote.getGlobal('appStartTime'); // 在vue加载会导致无法获取electron
 const renderSessionStorage = require('./core/renderSessionStorage');
-const windowHeader = require('./app/public/header.vue');
 const commonFunc = require('./core/commonFunc');
 // Vue.config.devtools = true;
 
-
-Vue.use(Vux);
+Vue.use(VueX);
 let store = require('./app/public/store');
 
 window['mainVue'] = new Vue({
@@ -47,6 +50,7 @@ window['mainVue'] = new Vue({
             containers: [],
         };
     },
+    router,
     store,
     beforeCreate(){
         window.addEventListener('message', (event) => {
@@ -66,12 +70,11 @@ window['mainVue'] = new Vue({
 
         this.getContainerList();
     },
-    computed: Vux.mapState({
+    computed: VueX.mapState({
         fontFamily: 'fontFamily',
     }),
     components: {
         windowHeader,
-        App,
     },
     methods: {
         sendIpcMain(name, type, arg = {}){
@@ -120,7 +123,7 @@ window['mainVue'] = new Vue({
                 dataCallback[args['callbackName']]['func'](args['data'], args['callbackName'], args['code'], args['errMsg']);
                 Reflect.deleteProperty(dataCallback, args['callbackName'])
             }
-            // console.log([event, args]);
+            // console.log([event, args]); // 输出返回的内容
         },
 
         getContainerList(){
@@ -183,7 +186,7 @@ window['mainVue'] = new Vue({
 
 
 });
-// mainVue.$mount('#body');
+mainVue.$mount('#body');
 
 
 electron.ipcRenderer.on(ipcRenderName, mainVue.ipcRendererCallback);

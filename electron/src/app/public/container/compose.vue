@@ -18,8 +18,8 @@
 </style>
 <script>
     const electron = window.require('electron');
-    const actionSelf = require('./actionSelf.vue');
-    const actionOther = require('./actionOther.vue');
+    import actionSelf from './actionSelf.vue';
+    import actionOther from './actionOther.vue';
 
     export default {
         props:{

@@ -3,15 +3,13 @@
   "version": "0.1.0",
   "description": "docker_lnmp gui on account of the electron",
   "author": "https://github.com/aogg",
-  "repository":{
+  "repository": {
     "type": "git",
     "url": "git+https://github.com/aogg/docker_lnmp.git"
   },
   "license": "Apache-2.0",
-
-
   "dependencies": {
-    "iconv-lite": "^0.4.15",
-    "vue-devtools": "^3.0.8"
+    "dotenv": "^6.0.0",
+    "iconv-lite": "^0.4.23"
   }
 }
