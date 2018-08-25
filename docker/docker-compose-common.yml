@@ -1,4 +1,4 @@
-version: '2'
+version: '2.1'
 services:
     common_nginx_aliases:
       # 当使用virtualBox的时候就需要在这里填写

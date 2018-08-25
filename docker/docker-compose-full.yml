@@ -1,4 +1,4 @@
-version: '2'
+version: '2.1'
 services:
   php:
     # docker run --name php-5.5 --volumes-from compose_base -v /Users/github/docker_lnmp/docker/php/conf/conf/:/usr/src/php/conf/ -v /Users/github/docker_lnmp/docker/php/conf/ext/:/usr/src/php/ext/ -v /Users/github/docker_lnmp/docker/php/conf/etc/:/usr/src/php/etc/ -v /Users/github/docker_lnmp/docker/php/src/:/usr/src/php/php-ext/ -p 9000:9000 -d my-php:5.5.36

@@ -1,5 +1,5 @@
 # 需要配置指定参数
-version: '2'
+version: '2.1'
 services:
   "php":
     volumes:
