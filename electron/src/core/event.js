@@ -110,7 +110,7 @@ eventConfig = { // todo 待，通过get()将处理逻辑放入对象内
             const nodeStorage = require('./nodeStorage');
             let containerConfigKey = 'containerConfig',
                 dockerNode = new NodeDocker(),
-                inspectFunc = function (){
+                machineInspectFunc = function (){
                     dockerNode.localSend = function (msg, name, error){
                         const configCommand = require('../config/config.command');
                         if (error || !msg){
@@ -137,7 +137,7 @@ eventConfig = { // todo 待，通过get()将处理逻辑放入对象内
                             );
                             nodeStorage.setItem(containerConfigKey + '.COMPOSE_CONVERT_WINDOWS_PATHS', true);
 
-                            nodeStorage.setItem('firstStartEvents', 2);
+                            nodeStorage.setItem('firstStartEvents', 2); // docker-machine管理，未配置
                             dockerNode.execDockerSwitch(true);
                         }
                     };
@@ -164,7 +164,9 @@ eventConfig = { // todo 待，通过get()将处理逻辑放入对象内
                         msg.match('Is the docker daemon running?')
                     ){ // 连接错误
                         // docker-machine inspect
-                        inspectFunc();
+                        machineInspectFunc();
+                    }else{ // 没有报错，也没有labels，应该是直连
+                        dockerNode.execDockerSwitch(true);
                     }
 
                 };
@@ -172,7 +174,7 @@ eventConfig = { // todo 待，通过get()将处理逻辑放入对象内
                 dockerNode.execDocker('async-switch', 'docker/info-labels', {});
             }else if (firstStartValue === 2){ // docker-machine
                 // 随时可能改变ip
-                inspectFunc();
+                machineInspectFunc();
                 // dockerNode.execDockerSwitch(true);
             }else{
                 dockerNode.execDockerSwitch(true);
