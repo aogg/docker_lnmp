@@ -4,6 +4,7 @@ electron/*/*
 !electron/src/*
 electron/src/node_modules/*
 .idea
+.DS_Store
 .vscode
 electron/src/temp/*
 electron/npm-debug.log
