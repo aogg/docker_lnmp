@@ -18,8 +18,10 @@ npm install --registry=https://registry.npm.taobao.org
 npm start
 ```
 
-- 首次点击构建，构建docker容器
+- 首次点击构建，构建docker容器  
 ![github](https://raw.githubusercontent.com/aogg/image_repository/master/docker_lnmp/首次点击构建.png "首次打开点击构建")
+
+- 再点击启动按钮，启动php环境  
 
 
 ## 容器配置  
