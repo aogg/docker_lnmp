@@ -10,21 +10,19 @@
 
 
 ## 使用
-- 1、npm打开
-```powershell
+- npm打开
+```bash
+git clone https://github.com/aogg/docker_lnmp.git
 cd electron
 npm install --registry=https://registry.npm.taobao.org
 npm start
 ```
 
-- 2、打包，放在electron/app/dist目录下
-```
-npm run pack
-```
+- 首次点击构建，构建docker容器
+![github](https://raw.githubusercontent.com/aogg/image_repository/master/docker_lnmp/首次点击构建.png "首次打开点击构建")
 
 
-
-**容器配置**  
+## 容器配置  
 各容器放在[docker](docker)文件夹内，对应配置也在容器文件夹的conf文件夹  
 其中php、nginx的conf文件夹实现共享目录，可本地修改并在容器内及时体现出
 如：  
@@ -35,8 +33,9 @@ npm run pack
 其中sources.list是通过COPY过去，所以如要修改必须重新构建所有容器
 
 
+<br>
 
-**多进程安装扩展**  
+## 多进程安装扩展  
 - 1、PHP扩展安装相关目录为[docker/php/src/](docker/php/src)，对应容器内路径为/usr/local/php-ext/。
 
 - 2、[config.json](docker/php/src/config.json)为所有扩展的配置文件  
@@ -63,16 +62,24 @@ bash /usr/local/php-ext.sh memcached-2.2.0 xdebug-2.4.0
 
 
 
+<br>
+
+## 打包
+放在electron/app/dist目录下
+```
+npm run pack
+```
+
 
 <br>
 
 ## 各截图
 
-主界面截图 
+> 主界面截图  
 ![github](https://raw.githubusercontent.com/aogg/image_repository/master/docker_lnmp/%e8%bd%af%e4%bb%b6%e4%b8%bb%e7%95%8c%e9%9d%a2%e6%88%aa%e5%9b%be.png "主界面截图")
 
 
-mini安装[多个扩展](https://github.com/aogg/docker_lnmp/blob/a716e496d59bf408804cda1e10b970af387a62bf/docker/php/src/install.json)时间 
+> mini安装[多个扩展](https://github.com/aogg/docker_lnmp/blob/a716e496d59bf408804cda1e10b970af387a62bf/docker/php/src/install.json)时间  
 ![github](https://raw.githubusercontent.com/aogg/image_repository/master/docker_lnmp/mini%E5%AE%89%E8%A3%85%E6%89%A9%E5%B1%95%E6%97%B6%E9%97%B4.png "mini安装扩展时间")
   
 
