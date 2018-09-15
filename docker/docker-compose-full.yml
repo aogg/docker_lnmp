@@ -16,8 +16,8 @@ services:
         PHP_APT_INSTALL: "${compose_build_php_apt_install}" # 并发安装扩展的数量
     image: "my-php:${compose_build_php_version}"
     container_name: "compose-php-${compose_build_php_version}"
-    ports:
-      - "9000:9000"
+    # ports:
+    #   - "9000:9000"
     extends:
       file: "docker-compose-common.yml"
       service: "common_hosts"
