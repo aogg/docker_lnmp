@@ -8,7 +8,7 @@ MAINTAINER aogg
 # 中文乱码，（无用）
 # ENV LANG zh_CN.UTF-8
 
-ARG BASE_ZONE='PRC'
+ARG BASE_ZONE='Asia/Shanghai'
 # 修改软件源   @see http://wiki.ubuntu.org.cn/%E6%BA%90%E5%88%97%E8%A1%A8 ，看好对应版本，并在本机ping过
 COPY ./sources.list /etc/apt/sources.list
 
