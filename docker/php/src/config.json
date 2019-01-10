@@ -98,8 +98,50 @@
 	},
 	{
 		"EXT_INSTALL" : 0,
+		"EXT_NAME"    : "phalcon",
+		"EXT_URL"     : "https://codeload.github.com/phalcon/cphalcon/zip/master",
+		"EXT_DEPEND"  : "",
+		"EXT_EVAL"    : "cd $tag_dir/cphalcon-master/build;./install;ext_no_make=1;"
+	},
+	{
+		"EXT_INSTALL" : 0,
+		"EXT_NAME"    : "protobuf-2.6.1",
+		"EXT_URL"     : "https://github.com/serggp/php-protobuf/archive/php7.zip",
+		"EXT_URL_TYPE": "zip",
+		"EXT_DEPEND"  : "",
+		"EXT_EVAL"    : "cd $temp_dir && curl_s \"https://github.com/google/protobuf/releases/download/v2.6.1/protobuf-2.6.1.tar.gz\" \"protobuf-2.6.1.tar.gz\" && tar zxvf protobuf-2.6.1.tar.gz && cd protobuf-2.6.1/ && ./configure && rm 'protobuf-2.6.1.tar.gz' && make && make install && export PATH=/usr/local/protobuf/bin:$PATH && cd .. "
+	},
+	{
+		"EXT_INSTALL" : 0,
+		"EXT_NAME"    : "swoole-coroutine-2.0.9",
+		"EXT_URL"     : "https://codeload.github.com/swoole/swoole-src/tar.gz/v2.0.9",
+		"EXT_ARG"     : "--enable-coroutine --enable-openssl --enable-async-redis",
+		"EXT_SORT"    : ["openssl"],
+		"EXT_DEPEND"  : "libhiredis-dev libz-dev",
+		"EXT_EVAL"    : ""
+	},
+	{
+		"EXT_INSTALL" : 0,
 		"EXT_NAME"    : "swoole-2.0.9",
 		"EXT_URL"     : "https://codeload.github.com/swoole/swoole-src/tar.gz/v2.0.9",
+		"EXT_ARG"     : "--enable-openssl --enable-async-redis",
+		"EXT_SORT"    : ["openssl"],
+		"EXT_DEPEND"  : "libhiredis-dev libz-dev",
+		"EXT_EVAL"    : ""
+	},
+	{
+		"EXT_INSTALL" : 0,
+		"EXT_NAME"    : "swoole-4.2.9",
+		"EXT_URL"     : "http://pecl.php.net/get/swoole-4.2.9.tgz",
+		"EXT_ARG"     : "--enable-openssl --enable-async-redis",
+		"EXT_SORT"    : ["openssl"],
+		"EXT_DEPEND"  : "libhiredis-dev libz-dev",
+		"EXT_EVAL"    : ""
+	},
+	{
+		"EXT_INSTALL" : 0,
+		"EXT_NAME"    : "swoole-coroutine-2.1.0",
+		"EXT_URL"     : "https://codeload.github.com/swoole/swoole-src/tar.gz/v2.1.0",
 		"EXT_ARG"     : "--enable-coroutine --enable-openssl --enable-async-redis",
 		"EXT_SORT"    : ["openssl"],
 		"EXT_DEPEND"  : "libhiredis-dev libz-dev",
