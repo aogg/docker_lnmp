@@ -21,6 +21,7 @@ ARG PHP_PROCESSES_NUM=15
 
 # 可被删除的依赖
 RUN apt update && apt install -y \
+		git \
 		# persistent / runtime deps
 		ca-certificates librecode0 libsqlite3-0 jq \
 		# phpize deps
