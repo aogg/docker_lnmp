@@ -13,4 +13,4 @@ deb-src http://cn.archive.ubuntu.com/ubuntu/ trusty-backports main restricted un
 deb-src http://cn.archive.ubuntu.com/ubuntu/ trusty-proposed main restricted universe multiverse
 # Canonical 合作伙伴和附加
 deb http://archive.canonical.com/ubuntu/ trusty partner
-deb http://extras.ubuntu.com/ubuntu/ trusty main
+#deb http://extras.ubuntu.com/ubuntu/ trusty main
