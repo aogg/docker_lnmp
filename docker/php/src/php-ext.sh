@@ -231,6 +231,7 @@ install_ext_depend(){
             apt update
 
             # 不支持并发执行
+            export DEBIAN_FRONTEND=noninteractive
             apt install -y --no-install-recommends $ext_depend
 
             echo -e "\e[1;33m ==========================apt完成===================== \e[0m" 1>&2
