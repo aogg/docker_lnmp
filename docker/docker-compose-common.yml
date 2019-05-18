@@ -1,14 +1,14 @@
 version: '2.1'
 services:
     common_nginx_aliases:
-      # 褰撲娇鐢╲irtualBox鐨勬椂鍊欏氨闇�瑕佸湪杩欓噷濉啓
-      # 鏈湴nginx椤圭洰濉啓鍦ㄨ繖
+      # 当使用virtualBox的时候就需要在这里填写
+      # 本地nginx项目填写在这
       networks:
         all:
           aliases:
             - nginx
     common_hosts:
-      # php涓叕鍏辩殑hosts淇敼
+      # php中公共的hosts修改
       extra_hosts:
         - "localhost:127.0.0.1"
 

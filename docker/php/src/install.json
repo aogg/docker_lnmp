@@ -1,23 +1,18 @@
 [
 	// "all",
 	"composer",
-	"memcache-3.0.8",
-	"memcached-2.2.0",
-	"xdebug-2.4.0",
-	"svn-1.0.2",
-	"redis-2.2.8",
-	"mongo-1.6.14",
-	"mongodb-1.1.9",
-	// "ioncube-5.5",
-	"phalcon",
-	"swoole-2.0.9",
-	"xhprof-0.9.4",
-	"php_zip",
-	"amqp-1.4.0",
+	
+	// 7.2
+	"memcached-3.0.4",
+	"xdebug-2.6.0",
+	"redis-3.1.6",
+	"mongodb-1.4.1",
+	"inotify-2.0.0",
 	"http-3.1.0",
 	
-	"curl", "pcntl", "mysqli",	"mysql", "mbstring", "json", "sockets", "iconv", "hash", "gettext", "ftp", "exif", "posix", "tokenizer", "shmop", "bcmath", "phar", "pdo", "pdo_mysql", "zlib",
-	"openssl", "mcrypt", "gd", "session"
+	"curl", "mysqli",	"mbstring", "json", "sockets", "iconv", "hash", "gettext", "ftp", "exif", "posix", "tokenizer", "shmop", "bcmath", "phar", "pdo", "pdo_mysql", "zlib",
+	"openssl", "session"
+	// "gd", 
 	// "需要安装的扩展"
 	// 留意最后的逗号
 	// todo 安装顺序不对
