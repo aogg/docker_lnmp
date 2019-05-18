@@ -20,10 +20,12 @@ ARG PHP_GPG_KEYS='0B96609E270F565C13292B24C13C70B87267B52D 0BD78B5F97500D450838F
 ARG PHP_PROCESSES_NUM=15
 
 # 可被删除的依赖
-RUN apt update && apt install -y \
+# DEBIAN_FRONTEND解决apt对话框问题
+RUN export DEBIAN_FRONTEND=noninteractive \
+	&& apt update && apt install -y \
 		git \
 		# persistent / runtime deps
-		ca-certificates librecode0 libsqlite3-0 jq \
+		ca-certificates librecode0 libsqlite3-0 jq bison \
 		# phpize deps
 		autoconf file libc-dev pkg-config re2c \
 		${PHP_APT_INSTALL} \
@@ -37,12 +39,17 @@ RUN apt update && apt install -y \
 # http://php.net/get/php-5.5.36.tar.gz/from/a/mirror
 # http://cn2.php.net/get/php-5.5.36.tar.gz/from/this/mirror
 # http://cn2.php.net/get/php-5.5.36.tar.gz.asc/from/this/mirror
-   	&& PHP_FILENAME="php-${PHP_VERSION}.tar.xz" \ 
+	&& echo '开始PHP安装' \
 	&& PHP_INI_DIR="${PHP_DIR}/conf" \
 
-
-	&& php_down_url='http://php.net/get' \
-	&& curl -fSL "${php_down_url}/${PHP_FILENAME}/from/this/mirror" -o "$PHP_FILENAME" \
+   	# && PHP_FILENAME="php-${PHP_VERSION}.tar.xz" \ 
+	# && php_down_url='http://php.net/get' \
+	# && curl -fSL "${php_down_url}/${PHP_FILENAME}/from/this/mirror" -o "$PHP_FILENAME" \
+	
+	# 改地址为：https://github.com/php/php-src/archive/php-7.2.18.tar.gz
+   	&& PHP_FILENAME="php-${PHP_VERSION}.tar.gz" \ 
+	&& php_down_url='https://github.com/php/php-src/archive' \
+	&& curl -fSL "${php_down_url}/${PHP_FILENAME}" -o "$PHP_FILENAME" \
 	# && echo "$PHP_SHA256 *${PHP_FILENAME}" | sha256sum -c - \
 	# && curl -fSL "${php_down_url}/$PHP_FILENAME.asc/from/this/mirror" -o "${PHP_FILENAME}.asc" \
 	# 认证
@@ -60,6 +67,9 @@ RUN apt update && apt install -y \
 	# 删除压缩包
 	&& rm -rf ${PHP_FILENAME}* \
 	&& cd $PHP_CONFIGURE_DIR \
+	# github包编译需要
+	&& ./buildconf --force \
+	&& chmod 755 /usr/bin/gcc \
 	# 安装php
 	&& ./configure \
 		--prefix=$PHP_DIR \
@@ -72,6 +82,7 @@ RUN apt update && apt install -y \
 		# 开启mysqlnd驱动
 		--enable-mysqlnd \
 		${PHP_CONFIGURE_ARGS} \
+	&& chmod 777 /usr/bin/gcc \
 	&& make -j"$(nproc)" \
 	&& make install \
 	# 未知
