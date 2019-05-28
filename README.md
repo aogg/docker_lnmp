@@ -22,7 +22,7 @@ npm start
 ![github](https://raw.githubusercontent.com/aogg/image_repository/master/docker_lnmp/首次点击构建.png "首次打开点击构建")
 
 - 再点击启动按钮，启动php环境  
-
+- 其中xdebug需要额外配置127.0.0.1 host_localhost的hosts配置
 
 ## 容器配置  
 各容器放在[docker](docker)文件夹内，对应配置也在容器文件夹的conf文件夹  
