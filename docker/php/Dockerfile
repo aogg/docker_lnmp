@@ -25,7 +25,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 	&& apt update && apt install -y \
 		git \
 		# persistent / runtime deps
-		ca-certificates librecode0 libsqlite3-0 jq bison \
+		ca-certificates librecode0 libsqlite3-0 jq \
 		# phpize deps
 		autoconf file libc-dev pkg-config re2c \
 		${PHP_APT_INSTALL} \
