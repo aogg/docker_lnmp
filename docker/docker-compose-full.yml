@@ -6,14 +6,14 @@ services:
       context: ./php/
       dockerfile: Dockerfile
       args:
-        PHP_CONFIGURE_DIR: "${compose_build_php_configure_dir}" # php±àÒë°üÄ¿Â¼
+        PHP_CONFIGURE_DIR: "${compose_build_php_configure_dir}" # phpç¼–è¯‘åŒ…ç›®å½•
         PHP_DIR: "${compose_build_php_dir}"
         PHP_VERSION: "${compose_build_php_version}"
         PHP_SHA256: "${compose_build_php_sha256}"
         PHP_GPG_KEYS: "${compose_build_php_gpg_keys}"
         PHP_CONFIGURE_ARGS: "${compose_build_php_configure_args}"
-        PHP_PROCESSES_NUM: "${compose_build_php_processes_num}" # ²¢·¢°²×°À©Õ¹µÄÊıÁ¿
-        PHP_APT_INSTALL: "${compose_build_php_apt_install}" # ²¢·¢°²×°À©Õ¹µÄÊıÁ¿
+        PHP_PROCESSES_NUM: "${compose_build_php_processes_num}" # å¹¶å‘å®‰è£…æ‰©å±•çš„æ•°é‡
+        PHP_APT_INSTALL: "${compose_build_php_apt_install}" # å¹¶å‘å®‰è£…æ‰©å±•çš„æ•°é‡
     image: "my-php:${compose_build_php_version}"
     container_name: "compose-php-${compose_build_php_version}"
     # ports:

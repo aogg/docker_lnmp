@@ -1,4 +1,4 @@
-# ĞèÒªÅäÖÃÖ¸¶¨²ÎÊı
+# éœ€è¦é…ç½®æŒ‡å®šå‚æ•°
 version: '2.1'
 services:
   "php":
@@ -10,7 +10,7 @@ services:
     extends:
       file: "docker-compose-full.yml"
       service: "php"
-    # ÔÚvirtualBoxÊ±³öÏÖÎŞ·¨Á¬½ÓÍâÍøµÄÇé¿ö
+    # åœ¨virtualBoxæ—¶å‡ºç°æ— æ³•è¿æ¥å¤–ç½‘çš„æƒ…å†µ
     dns: '8.8.8.8'
     networks:
       all:
@@ -22,7 +22,7 @@ services:
       - "${compose_volumes_nginx}"
     volumes_from: 
       - base
-    # ÔÚvirtualBoxÊ±³öÏÖÎŞ·¨Á¬½ÓÍâÍøµÄÇé¿ö
+    # åœ¨virtualBoxæ—¶å‡ºç°æ— æ³•è¿æ¥å¤–ç½‘çš„æƒ…å†µ
     dns: '8.8.8.8'
     extends:
       file: "docker-compose-full.yml"
