@@ -78,7 +78,7 @@ npm run pack
 ## 各截图
 
 > 主界面截图  
-![github](https://cdn.jsdelivr.net/gh/aogg/image_repository@master/docker_lnmp/%E9%A6%96%E6%AC%A1%E7%82%B9%E5%87%BB%E6%9E%84%E5%BB%BA.png "主界面截图")
+![主界面截图](https://cdn.jsdelivr.net/gh/aogg/image_repository@master/docker_lnmp/%E9%A6%96%E6%AC%A1%E7%82%B9%E5%87%BB%E6%9E%84%E5%BB%BA.png "主界面截图")
 
 
 > mini安装[多个扩展](https://github.com/aogg/docker_lnmp/blob/a716e496d59bf408804cda1e10b970af387a62bf/docker/php/src/install.json)时间  
